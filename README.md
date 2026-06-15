@@ -24,16 +24,17 @@ To clone the repository use the following links:
 
 * with HTTPS:
 ```
-https
+https://github.com/tray-46/e-shop.git
 ```
 
 * with SSH:  
 ```
-ssh
+git@github.com:tray-46/e-shop.git
 ```
 
-To run the application: in consol open project directory and execute following command:
+### To run the application:  
+In consol open project directory and execute following command:
 ```
 python manage.py runserver
 ```
-after server starts in browser open link: http://localhost:8000
+After server starts in browser open link: http://localhost:8000
