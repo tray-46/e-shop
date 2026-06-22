@@ -33,26 +33,35 @@
 
 
     <div class="row text-start">
+        {% for contact on contacts_info %}
         <div class="col-lg-9 col-md-6 col-sm-12">
             <div class="card mb-4 box-shadow">
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
                             <td class="w-25">Страна</td>
-                            <td>USA</td>
+                            <td>{{contact.contact_country}}</td>
                         </tr>
                         <tr>
-                            <td class="w-25">ИНН</td>
-                            <td>91-1144442</td>
+                            <td class="w-25" colspan="2">{{contact.contact_name}}</td>
                         </tr>
                         <tr>
                             <td class="w-25">Адрес</td>
-                            <td>Redmond,WA,98052-6399</td>
+                            <td>{{contact.contact_address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Эл. почта</td>
+                            <td>{{contact.contact_address}}</td>
+                        </tr>
+                        <tr>
+                            <td class="w-25">Телефон</td>
+                            <td>{{contact.contact_phone}}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+        {% endfor%}
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">

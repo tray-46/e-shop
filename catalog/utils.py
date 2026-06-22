@@ -1,6 +1,7 @@
 from django.db.models import QuerySet
 
-from catalog.models import Product
+from catalog.models import Product, Contact
+
 
 def get_recent_products(number_of_products: int = 4) -> QuerySet:
     """
@@ -8,5 +9,13 @@ def get_recent_products(number_of_products: int = 4) -> QuerySet:
     :param number_of_products (int0: number of products to return, default: 4
     :return (QuerySet): last added products
     """
-    products = Product.objects.all()[:number_of_products]
+    products = Product.objects.order_by("-created_at")[:number_of_products]
     return products
+
+
+def get_contacts() -> QuerySet:
+    """
+    Return contacts
+    :return (QuerySet): all contacts:
+    """
+    return Contact.objects.all().order_by("id")
