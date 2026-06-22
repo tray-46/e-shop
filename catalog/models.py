@@ -67,7 +67,7 @@ class Product(models.Model):
         verbose_name="Категория продукта",
         help_text="Выберите катагорию продуктов",
     )
-    price = models.DecimalField(decimal_places=2, verbose_name="Цена за покупку", help_text="Введите цену продукта")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена за покупку", help_text="Введите цену продукта")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
 
