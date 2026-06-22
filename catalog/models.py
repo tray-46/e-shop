@@ -103,3 +103,28 @@ class Contact(models.Model):
     def __str__(self) -> str:
         """Return string representation of Contact"""
         return f"{self.contact_name}, {self.contact_country}"
+
+
+class Feedback(models.Model):
+    """
+    Store a single contact information
+
+    Attributes:
+
+    """
+    feedback_username = models.CharField(max_length=150, verbose_name="Имя")
+    feedback_phone = models.CharField(max_length=15, verbose_name="Телефон")
+    feedback_message = models.TextField(verbose_name="Сообщение")
+    processed = models.BooleanField(default=False, verbose_name="Обработан")  # имя так себе =(
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+
+    class Meta:
+        """Meta options for Contact model"""
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        ordering = ["created_at"]
+
+    def __str__(self) -> str:
+        """Return string representation of Contact"""
+        return f"{self.feedback_username} - {self.created_at}"
+

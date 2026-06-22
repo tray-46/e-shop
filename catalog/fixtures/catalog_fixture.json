@@ -40,6 +40,14 @@
   }
 },
 {
+  "model": "catalog.category",
+  "pk": 6,
+  "fields": {
+    "category_name": "Cat1",
+    "category_description": "Cat1"
+  }
+},
+{
   "model": "catalog.product",
   "pk": 1,
   "fields": {
@@ -141,6 +149,87 @@
     "price": "333.33",
     "created_at": "2026-06-22T10:40:35.352Z",
     "updated_at": "2026-06-22T10:40:35.352Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 10,
+  "fields": {
+    "product_name": "Prod1",
+    "product_description": "Prod 1",
+    "image": "",
+    "product_category": 6,
+    "price": "1.00",
+    "created_at": "2026-06-22T11:33:37.608Z",
+    "updated_at": "2026-06-22T11:33:37.608Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 11,
+  "fields": {
+    "product_name": "Prod2",
+    "product_description": "Prod 2",
+    "image": "",
+    "product_category": null,
+    "price": "1.00",
+    "created_at": "2026-06-22T11:33:37.611Z",
+    "updated_at": "2026-06-22T11:33:37.611Z"
+  }
+},
+{
+  "model": "catalog.contact",
+  "pk": 1,
+  "fields": {
+    "contact_country": "Россия",
+    "contact_name": "Управляющий офис",
+    "contact_address": "Москва, улица, дом, офис",
+    "contact_email": "msk@skystore.ru",
+    "contact_phone": "+77777777777"
+  }
+},
+{
+  "model": "catalog.contact",
+  "pk": 2,
+  "fields": {
+    "contact_country": "Россия",
+    "contact_name": "Департамент разработки",
+    "contact_address": "Екатеринбург, адрес, дом, офис",
+    "contact_email": "ekb@skystore.ru",
+    "contact_phone": "+78888888888"
+  }
+},
+{
+  "model": "catalog.contact",
+  "pk": 3,
+  "fields": {
+    "contact_country": "Казахстан",
+    "contact_name": "Офис продаж",
+    "contact_address": "Астана, улица, дом",
+    "contact_email": "sell@skystote.kz",
+    "contact_phone": "+75555555555"
+  }
+},
+{
+  "model": "catalog.feedback",
+  "pk": 1,
+  "fields": {
+    "feedback_username": "sloth",
+    "feedback_phone": "+79876543219",
+    "feedback_message": "some feedback",
+    "processed": false,
+    "created_at": "2026-06-22T17:06:02.533Z"
+  }
+},
+{
+  "model": "catalog.feedback",
+  "pk": 2,
+  "fields": {
+    "feedback_username": "tray",
+    "feedback_phone": "+71234567891",
+    "feedback_message": "message text",
+    "processed": false,
+    "created_at": "2026-06-22T17:06:27.319Z"
   }
 }
 ]

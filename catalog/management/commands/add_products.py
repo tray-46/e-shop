@@ -5,7 +5,7 @@ Usage: python manage.py add_products
 """
 
 from django.core.management import BaseCommand, call_command, CommandError
-from catalog.models import Category, Product
+from catalog.models import Category, Product, Contact, Feedback
 
 
 class Command(BaseCommand):
@@ -15,6 +15,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         Product.objects.all().delete()
         Category.objects.all().delete()
+        Contact.objects.all().delete()
+        Feedback.objects.all().delete()
 
         try:
             call_command("loaddata", "catalog_fixture.json", app="catalog", format="json", ignorenonexistent=True)

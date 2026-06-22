@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from catalog.models import Product, Contact
+from catalog.models import Product, Contact, Feedback
 from catalog.utils import get_recent_products, get_contacts
 
 
@@ -42,9 +42,12 @@ def contacts(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: the fully rendered contacts HTML page or a page with submission confirmation
     """
-    if request.method == "POST":
-        name = request.POST.get("name", "")
-        messages.success(request, f"Спасибо {name}, Ваше сообщение получено.")
-        return render(request, "catalog/contacts.html")
     contacts_info = get_contacts()
-    return render(request, "catalog/contacts.html", context={"contacts": contacts_info})
+    if request.method == "POST":
+        username = request.POST.get("name", "")
+        user_phone = request.POST.get("phone", "")
+        feedback_message = request.POST.get("message", "")
+        messages.success(request, f"Спасибо {username}, Ваше сообщение получено.")
+        Feedback.objects.create(feedback_username=username, feedback_phone=user_phone, feedback_message=feedback_message)
+        return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
+    return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
