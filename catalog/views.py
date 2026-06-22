@@ -2,6 +2,9 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
+from catalog.models import Product
+from catalog.utils import get_recent_products
+
 
 # Create your views here.
 def home(request: HttpRequest) -> HttpResponse:
@@ -17,7 +20,9 @@ def home(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: the fully rendered HTML page
     """
-    return render(request, "catalog/home.html")
+    recent_products = get_recent_products()
+    print(recent_products)
+    return render(request, "catalog/home.html", context={"recent_products": recent_products})
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
@@ -41,4 +46,5 @@ def contacts(request: HttpRequest) -> HttpResponse:
         name = request.POST.get("name", "")
         messages.success(request, f"Спасибо {name}, Ваше сообщение получено.")
         return render(request, "catalog/contacts.html")
+
     return render(request, "catalog/contacts.html")
