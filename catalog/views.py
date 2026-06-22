@@ -17,7 +17,7 @@ def home(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: the fully rendered HTML page
     """
-    return render(request, 'catalog/home.html')
+    return render(request, "catalog/home.html")
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
@@ -40,5 +40,5 @@ def contacts(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         name = request.POST.get("name", "")
         messages.success(request, f"Спасибо {name}, Ваше сообщение получено.")
-        return render(request, 'catalog/contacts.html')
-    return render(request, 'catalog/contacts.html')
+        return render(request, "catalog/contacts.html")
+    return render(request, "catalog/contacts.html")
