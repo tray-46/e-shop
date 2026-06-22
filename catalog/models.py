@@ -23,7 +23,6 @@ class Category(models.Model):
 
     class Meta:
         """Meta options for Category model"""
-
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
         ordering = ["category_name"]
@@ -73,7 +72,6 @@ class Product(models.Model):
 
     class Meta:
         """Meta options for Product model"""
-
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["product_name"]
@@ -81,3 +79,27 @@ class Product(models.Model):
     def __str__(self) -> str:
         """Return string representation of Product"""
         return self.product_name
+
+
+class Contact(models.Model):
+    """
+    Store a single contact information
+
+    Attributes:
+
+    """
+    contact_country = models.CharField(max_length=50, verbose_name="Страна", help_text="Введите название страны")
+    contact_name = models.CharField(max_length=150, verbose_name="Наименование", help_text="Введите наименование контакта")
+    contact_address = models.CharField(max_length=250, verbose_name="Адрес", help_text="Введите адрес")
+    contact_email = models.EmailField(verbose_name="e-mail", help_text="Введите адрес электронной почты")
+    contact_phone = models.CharField(max_length=15, verbose_name="Телефон", help_text="Введите номер телефона")
+
+    class Meta:
+        """Meta options for Contact model"""
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"
+        ordering = ["contact_country"]
+
+    def __str__(self) -> str:
+        """Return string representation of Contact"""
+        return f"{self.contact_name}, {self.contact_country}"
