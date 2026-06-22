@@ -10,7 +10,7 @@ requires-python = ">=3.14"
 dependencies = [
     "django (>=6.0.6,<7.0.0)",
     "python-dotenv (>=1.2.2,<2.0.0)",
-    "psycopg2 (>=2.9.12,<3.0.0)"
+    "psycopg2 (>=2.9.12,<3.0.0)",
 ]
 
 
@@ -22,8 +22,9 @@ build-backend = "poetry.core.masonry.api"
 lint = [
     "flake8 (>=7.3.0,<8.0.0)",
     "isort (>=8.0.1,<9.0.0)",
-    "mypy (>=1.19.1,<2.0.0)",
-    "black (>=26.3.1,<27.0.0)"
+    "mypy (>=2.1.0,<3.0.0)",
+    "black (>=26.3.1,<27.0.0)",
+    "django-stubs (>=6.0.5,<7.0.0)"
 ]
 
 [tool.black]
@@ -44,5 +45,9 @@ profile = "black"
 disallow_untyped_defs = true
 no_implicit_optional = true
 warn_return_any = true
-exclude = ['^venv',]
+exclude = ["^venv",]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
 

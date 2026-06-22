@@ -1,6 +1,6 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.contrib import messages
 
 
 # Create your views here.
