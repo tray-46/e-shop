@@ -32,8 +32,11 @@ https://github.com/tray-46/e-shop.git
 git@github.com:tray-46/e-shop.git
 ```
 
+Install dependencies.  
+From `.env_example` create `.env` file and fill it with your environment settings.  
+
 ### To run the application:  
-In consol open project directory and execute following command:
+In console open project directory and execute following command:
 ```
 python manage.py runserver
 ```
