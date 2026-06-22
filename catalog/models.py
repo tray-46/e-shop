@@ -56,7 +56,7 @@ class Product(models.Model):
         null=True,
         blank=True,
         verbose_name="Изображение продукта",
-        help_text="Загрузите изобрадение продукта",
+        help_text="Загрузите изображение продукта",
     )
     product_category = models.ForeignKey(
         Category,
