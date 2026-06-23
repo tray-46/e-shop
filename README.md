@@ -32,8 +32,9 @@ https://github.com/tray-46/e-shop.git
 git@github.com:tray-46/e-shop.git
 ```
 
-Install dependencies.  
+Install dependencies.
 From `.env_example` create `.env` file and fill it with your environment settings.  
+Create database with name specified in settings.  
 
 ### To run the application:  
 In console open project directory and execute following command:

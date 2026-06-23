@@ -4,15 +4,18 @@ Command to populate catalog app database with example data.
 Usage: python manage.py add_products
 """
 
-from django.core.management import BaseCommand, call_command, CommandError
-from catalog.models import Category, Product, Contact, Feedback
+from typing import Any
+
+from django.core.management import BaseCommand, CommandError, call_command
+
+from catalog.models import Category, Contact, Feedback, Product
 
 
 class Command(BaseCommand):
 
     help = "Add categories and products to catalog app database"
 
-    def handle(self, *args, **options):
+    def handle(self, *args: Any, **options: Any) -> None:
         Product.objects.all().delete()
         Category.objects.all().delete()
         Contact.objects.all().delete()
@@ -26,9 +29,9 @@ class Command(BaseCommand):
 
         cat1, _ = Category.objects.get_or_create(category_name="Cat1", category_description="Cat1")
 
-        products = [
+        products: list[dict[str, Any]] = [
             {"product_name": "Prod1", "product_description": "Prod 1", "product_category": cat1, "price": 1},
-            {"product_name": "Prod2", "product_description": "Prod 2", "price": 1}
+            {"product_name": "Prod2", "product_description": "Prod 2", "price": 1},
         ]
 
         for prod in products:

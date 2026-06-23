@@ -83,11 +83,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": "localhost",
-        "PORT": "5432",
-        "NAME": "catalog_db",
-        "USER": "tray",
-        "PASSWORD": "tray",
+        "HOST": os.getenv("PG_HOST"),
+        "PORT": os.getenv("PG_PORT"),
+        "NAME": os.getenv("PG_DBNAME"),
+        "USER": os.getenv("PG_USER"),
+        "PASSWORD": os.getenv("PG_PWD"),
     },
 }
 

@@ -23,6 +23,7 @@ class Category(models.Model):
 
     class Meta:
         """Meta options for Category model"""
+
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
         ordering = ["category_name"]
@@ -66,12 +67,15 @@ class Product(models.Model):
         verbose_name="Категория продукта",
         help_text="Выберите катагорию продуктов",
     )
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена за покупку", help_text="Введите цену продукта")
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name="Цена за покупку", help_text="Введите цену продукта"
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
 
     class Meta:
         """Meta options for Product model"""
+
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["product_name"]
@@ -88,14 +92,18 @@ class Contact(models.Model):
     Attributes:
 
     """
+
     contact_country = models.CharField(max_length=50, verbose_name="Страна", help_text="Введите название страны")
-    contact_name = models.CharField(max_length=150, verbose_name="Наименование", help_text="Введите наименование контакта")
+    contact_name = models.CharField(
+        max_length=150, verbose_name="Наименование", help_text="Введите наименование контакта"
+    )
     contact_address = models.CharField(max_length=250, verbose_name="Адрес", help_text="Введите адрес")
     contact_email = models.EmailField(verbose_name="e-mail", help_text="Введите адрес электронной почты")
     contact_phone = models.CharField(max_length=15, verbose_name="Телефон", help_text="Введите номер телефона")
 
     class Meta:
         """Meta options for Contact model"""
+
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
         ordering = ["contact_country"]
@@ -112,6 +120,7 @@ class Feedback(models.Model):
     Attributes:
 
     """
+
     feedback_username = models.CharField(max_length=150, verbose_name="Имя")
     feedback_phone = models.CharField(max_length=15, verbose_name="Телефон")
     feedback_message = models.TextField(verbose_name="Сообщение")
@@ -120,6 +129,7 @@ class Feedback(models.Model):
 
     class Meta:
         """Meta options for Contact model"""
+
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
         ordering = ["created_at"]
@@ -127,4 +137,3 @@ class Feedback(models.Model):
     def __str__(self) -> str:
         """Return string representation of Contact"""
         return f"{self.feedback_username} - {self.created_at}"
-

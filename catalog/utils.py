@@ -1,6 +1,6 @@
 from django.db.models import QuerySet
 
-from catalog.models import Product, Contact
+from catalog.models import Contact, Product
 
 
 def get_recent_products(number_of_products: int = 4) -> QuerySet:
