@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from catalog.models import Feedback
+from catalog.models import Feedback, Product
 from catalog.utils import get_contacts, get_recent_products
 
 
@@ -20,9 +20,14 @@ def home(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: the fully rendered HTML page
     """
-    recent_products = get_recent_products()
-    print(recent_products)
-    return render(request, "catalog/home.html", context={"recent_products": recent_products})
+    # recent_products = get_recent_products()
+    # print(recent_products)
+    # return render(request, "catalog/home.html", context={"recent_products": recent_products})
+    products = Product.objects.all()
+
+
+
+    return render(request, "catalog/home.html", context={"products": products})
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
@@ -53,3 +58,8 @@ def contacts(request: HttpRequest) -> HttpResponse:
         )
         return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
     return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
+
+
+def product_details(request: HttpRequest, pk: int) -> HttpResponse:
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, "catalog/product.html", context={"product": product})
