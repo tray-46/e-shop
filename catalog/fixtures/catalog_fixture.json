@@ -1,0 +1,235 @@
+[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "category_name": "Категория 1",
+    "category_description": "Первая категория продуктов"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "category_name": "Категория 2",
+    "category_description": "Вторая категория продуктов"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "category_name": "Category_1",
+    "category_description": "Category one description"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 4,
+  "fields": {
+    "category_name": "Category_2",
+    "category_description": "Category two description"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 5,
+  "fields": {
+    "category_name": "Category_3",
+    "category_description": ""
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 6,
+  "fields": {
+    "category_name": "Cat1",
+    "category_description": "Cat1"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 1,
+  "fields": {
+    "product_name": "Продукт 1",
+    "product_description": "Первый продукт",
+    "image": "products/product_1.png",
+    "product_category": 1,
+    "price": "1.00",
+    "created_at": "2026-06-22T09:18:50.410Z",
+    "updated_at": "2026-06-22T09:18:50.410Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 2,
+  "fields": {
+    "product_name": "Продукт 2",
+    "product_description": "Второй продукт",
+    "image": "products/product_2.png",
+    "product_category": 2,
+    "price": "2.00",
+    "created_at": "2026-06-22T09:19:12.731Z",
+    "updated_at": "2026-06-22T09:19:12.731Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 3,
+  "fields": {
+    "product_name": "Продукт 3",
+    "product_description": "Третий продукт",
+    "image": "",
+    "product_category": null,
+    "price": "3.00",
+    "created_at": "2026-06-22T09:19:34.177Z",
+    "updated_at": "2026-06-22T09:19:34.177Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 4,
+  "fields": {
+    "product_name": "Product_1.1",
+    "product_description": "Product one dot one description",
+    "image": "",
+    "product_category": 3,
+    "price": "111.11",
+    "created_at": "2026-06-22T10:40:35.352Z",
+    "updated_at": "2026-06-22T10:40:35.352Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 5,
+  "fields": {
+    "product_name": "Product_1.2",
+    "product_description": "Product one dot two description",
+    "image": "",
+    "product_category": 3,
+    "price": "111.22",
+    "created_at": "2026-06-22T10:40:35.352Z",
+    "updated_at": "2026-06-22T10:40:35.352Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 7,
+  "fields": {
+    "product_name": "Product_3.1",
+    "product_description": "Product three dot one description",
+    "image": "products/product_3.png",
+    "product_category": 5,
+    "price": "333.11",
+    "created_at": "2026-06-22T10:40:35.352Z",
+    "updated_at": "2026-06-22T10:40:35.352Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 8,
+  "fields": {
+    "product_name": "Product_3.2",
+    "product_description": "Product three dot two description",
+    "image": "",
+    "product_category": 5,
+    "price": "333.22",
+    "created_at": "2026-06-22T10:40:35.352Z",
+    "updated_at": "2026-06-22T10:40:35.352Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 9,
+  "fields": {
+    "product_name": "Product_3.3",
+    "product_description": "Product three dot three description",
+    "image": "",
+    "product_category": null,
+    "price": "333.33",
+    "created_at": "2026-06-22T10:40:35.352Z",
+    "updated_at": "2026-06-22T10:40:35.352Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 10,
+  "fields": {
+    "product_name": "Prod1",
+    "product_description": "Prod 1",
+    "image": "",
+    "product_category": 6,
+    "price": "1.00",
+    "created_at": "2026-06-22T11:33:37.608Z",
+    "updated_at": "2026-06-22T11:33:37.608Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 11,
+  "fields": {
+    "product_name": "Prod2",
+    "product_description": "Prod 2",
+    "image": "",
+    "product_category": null,
+    "price": "1.00",
+    "created_at": "2026-06-22T11:33:37.611Z",
+    "updated_at": "2026-06-22T11:33:37.611Z"
+  }
+},
+{
+  "model": "catalog.contact",
+  "pk": 1,
+  "fields": {
+    "contact_country": "Россия",
+    "contact_name": "Управляющий офис",
+    "contact_address": "Москва, улица, дом, офис",
+    "contact_email": "msk@skystore.ru",
+    "contact_phone": "+77777777777"
+  }
+},
+{
+  "model": "catalog.contact",
+  "pk": 2,
+  "fields": {
+    "contact_country": "Россия",
+    "contact_name": "Департамент разработки",
+    "contact_address": "Екатеринбург, адрес, дом, офис",
+    "contact_email": "ekb@skystore.ru",
+    "contact_phone": "+78888888888"
+  }
+},
+{
+  "model": "catalog.contact",
+  "pk": 3,
+  "fields": {
+    "contact_country": "Казахстан",
+    "contact_name": "Офис продаж",
+    "contact_address": "Астана, улица, дом",
+    "contact_email": "sell@skystote.kz",
+    "contact_phone": "+75555555555"
+  }
+},
+{
+  "model": "catalog.feedback",
+  "pk": 1,
+  "fields": {
+    "feedback_username": "sloth",
+    "feedback_phone": "+79876543219",
+    "feedback_message": "some feedback",
+    "processed": false,
+    "created_at": "2026-06-22T17:06:02.533Z"
+  }
+},
+{
+  "model": "catalog.feedback",
+  "pk": 2,
+  "fields": {
+    "feedback_username": "tray",
+    "feedback_phone": "+71234567891",
+    "feedback_message": "message text",
+    "processed": false,
+    "created_at": "2026-06-22T17:06:27.319Z"
+  }
+}
+]

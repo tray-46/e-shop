@@ -1,6 +1,9 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.contrib import messages
+
+from catalog.models import Feedback
+from catalog.utils import get_contacts, get_recent_products
 
 
 # Create your views here.
@@ -17,7 +20,9 @@ def home(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: the fully rendered HTML page
     """
-    return render(request, 'catalog/home.html')
+    recent_products = get_recent_products()
+    print(recent_products)
+    return render(request, "catalog/home.html", context={"recent_products": recent_products})
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
@@ -37,8 +42,14 @@ def contacts(request: HttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: the fully rendered contacts HTML page or a page with submission confirmation
     """
+    contacts_info = get_contacts()
     if request.method == "POST":
-        name = request.POST.get("name", "")
-        messages.success(request, f"Спасибо {name}, Ваше сообщение получено.")
-        return render(request, 'catalog/contacts.html')
-    return render(request, 'catalog/contacts.html')
+        username = request.POST.get("name", "")
+        user_phone = request.POST.get("phone", "")
+        feedback_message = request.POST.get("message", "")
+        messages.success(request, f"Спасибо {username}, Ваше сообщение получено.")
+        Feedback.objects.create(
+            feedback_username=username, feedback_phone=user_phone, feedback_message=feedback_message
+        )
+        return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
+    return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
