@@ -48,6 +48,46 @@
   }
 },
 {
+  "model": "catalog.category",
+  "pk": 7,
+  "fields": {
+    "category_name": "Рассылки",
+    "category_description": "Рассылки"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 8,
+  "fields": {
+    "category_name": "Телеграм боты",
+    "category_description": "Телеграм боты"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 9,
+  "fields": {
+    "category_name": "Полезные утилиты",
+    "category_description": "Полезные утилиты"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 10,
+  "fields": {
+    "category_name": "Веб-приложения",
+    "category_description": "Веб-приложения"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 11,
+  "fields": {
+    "category_name": "Микросервисы",
+    "category_description": "Микросервисы"
+  }
+},
+{
   "model": "catalog.product",
   "pk": 1,
   "fields": {
@@ -65,7 +105,7 @@
   "pk": 2,
   "fields": {
     "product_name": "Продукт 2",
-    "product_description": "Второй продукт",
+    "product_description": "Второй продукт\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "products/product_2.png",
     "product_category": 2,
     "price": "2.00",
@@ -91,7 +131,7 @@
   "pk": 4,
   "fields": {
     "product_name": "Product_1.1",
-    "product_description": "Product one dot one description",
+    "product_description": "Product one dot one description\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "",
     "product_category": 3,
     "price": "111.11",
@@ -130,7 +170,7 @@
   "pk": 8,
   "fields": {
     "product_name": "Product_3.2",
-    "product_description": "Product three dot two description",
+    "product_description": "Product three dot two description\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "",
     "product_category": 5,
     "price": "333.22",
@@ -156,7 +196,7 @@
   "pk": 10,
   "fields": {
     "product_name": "Prod1",
-    "product_description": "Prod 1",
+    "product_description": "Prod 1\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
     "image": "",
     "product_category": 6,
     "price": "1.00",
@@ -175,6 +215,71 @@
     "price": "1.00",
     "created_at": "2026-06-22T11:33:37.611Z",
     "updated_at": "2026-06-22T11:33:37.611Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 12,
+  "fields": {
+    "product_name": "Телеграм-бот \"Секретарь\"",
+    "product_description": "Телеграм-бот \"Секретарь\"\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image": "products/tg.png",
+    "product_category": 8,
+    "price": "100.00",
+    "created_at": "2026-06-29T10:10:05.851Z",
+    "updated_at": "2026-06-29T10:52:04.395Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 14,
+  "fields": {
+    "product_name": "Рассылка \"С днём рождения\"",
+    "product_description": "Рассылка \"С днём рождения\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "image": "products/mail_bday.png",
+    "product_category": 7,
+    "price": "50.00",
+    "created_at": "2026-06-30T05:34:44.214Z",
+    "updated_at": "2026-06-30T05:34:44.214Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 15,
+  "fields": {
+    "product_name": "1",
+    "product_description": "1",
+    "image": "",
+    "product_category": null,
+    "price": "1.00",
+    "created_at": "2026-06-30T05:37:56.937Z",
+    "updated_at": "2026-06-30T05:37:56.937Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 16,
+  "fields": {
+    "product_name": "2",
+    "product_description": "2",
+    "image": "",
+    "product_category": 4,
+    "price": "2.00",
+    "created_at": "2026-06-30T05:46:00.076Z",
+    "updated_at": "2026-06-30T05:46:00.076Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 17,
+  "fields": {
+    "product_name": "bzz",
+    "product_description": "bzz descr",
+    "image": "",
+    "product_category": null,
+    "price": "1.00",
+    "created_at": "2026-06-30T07:40:29.374Z",
+    "updated_at": "2026-06-30T07:40:29.374Z"
   }
 },
 {
