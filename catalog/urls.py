@@ -14,4 +14,5 @@ urlpatterns = [
     path("", RedirectView.as_view(pattern_name="catalog:home", permanent=True)),
     path("contacts/", views.contacts, name="contacts"),
     path("products/<int:pk>", views.product_details, name="product_details"),
+    path("add_product", views.add_product, name="add_product"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

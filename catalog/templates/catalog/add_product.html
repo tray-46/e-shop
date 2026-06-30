@@ -1,0 +1,14 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Skystore: добавление продукта{% endblock %}
+
+{% block content %}
+<h1>Добавление нового продукта</h1>
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+{% endblock %}

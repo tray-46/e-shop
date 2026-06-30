@@ -1,7 +1,9 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
+from catalog.forms import ProductForm
 from catalog.models import Feedback, Product
 from catalog.utils import get_contacts, get_recent_products
 
@@ -23,10 +25,11 @@ def home(request: HttpRequest) -> HttpResponse:
     # recent_products = get_recent_products()
     # print(recent_products)
     # return render(request, "catalog/home.html", context={"recent_products": recent_products})
-    products = Product.objects.all()
+    products_all = Product.objects.all()
 
-
-
+    paginator = Paginator(products_all, 4)
+    page_number = request.GET.get("page", 1)
+    products = paginator.get_page(page_number)
     return render(request, "catalog/home.html", context={"products": products})
 
 
@@ -63,3 +66,15 @@ def contacts(request: HttpRequest) -> HttpResponse:
 def product_details(request: HttpRequest, pk: int) -> HttpResponse:
     product = get_object_or_404(Product, pk=pk)
     return render(request, "catalog/product.html", context={"product": product})
+
+
+def add_product(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('catalog:home')
+    else:
+        form = ProductForm()
+
+    return render(request, "catalog/add_product.html", {"form": form})
