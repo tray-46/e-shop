@@ -1,0 +1,54 @@
+{% extends "catalog/base.html" %}
+{% load static %}
+
+{% block title %}Skystore: {{product.product_name}}{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-4">
+        <div class="ratio ratio-1x1">
+            {% if product.image %}
+                <img class="img-thumbnail" style="object-fit: cover;" src="{{ product.image.url }}" alt="{{ product.product_name }}">
+            {% else %}
+                <img class="img-thumbnail" style="object-fit: cover;" src="{% static 'images/no_image.png' %}" alt="{{ product.product_name }}">
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-7">
+        <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Название продукта:</h6>
+                </div>
+                <span class="text-secondary">{{ product.product_name }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Категория:</h6>
+                </div>
+                <span class="text-secondary">{{ product.product_category }}</span>
+            </li>
+            <li class="list-group-item lh-sm">
+                <div>
+                    <h6 class="my-0">Описание продукта:</h6>
+                </div>
+                <div class="mt-1">
+                    <span class="text-secondary">{{ product.product_description }}</span>
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Цена:</h6>
+                </div>
+                <span class="text-secondary">$ {{ product.price }}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <a class="btn btn-lg btn-block btn-outline-primary mt-3 w-auto" role="button"
+       href="{{ request.META.HTTP_REFERER|default:'/' }}">Назад</a>
+    <!-- не лучший способ, но пока так  -->
+</div>
+{% endblock %}

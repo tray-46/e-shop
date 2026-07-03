@@ -1,0 +1,30 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Skystore: добавление продукта{% endblock %}
+
+{% block content %}
+<h1>Добавление нового продукта</h1>
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!--
+        {{ form.as_p }}
+        -->
+        <ul class="list-group">
+            {% for field in form %}
+                <li class="list-group-item d-flex lh-sm">
+                    <div class="d-flex flex-column gap-2">
+                        {{ field.errors }}
+                        <h6 class="my-0">{{ field.label_tag }}</h6>
+                        {{ field }}
+                        <div class="text-secondary">{{ field.help_text|safe }}</div>
+                    </div>
+                </li>
+            {% endfor%}
+            <li class="list-group-item d-flex lh-sm">
+                <button class="btn btn-lg btn-block btn-outline-primary w-auto" type="submit">Добавить</button>
+            </li>
+        </ul>
+    </form>
+</div>
+{% endblock %}

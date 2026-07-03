@@ -1,3 +1,5 @@
+from decimal import Decimal
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -68,7 +70,12 @@ class Product(models.Model):
         help_text="Выберите катагорию продуктов",
     )
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="Цена за покупку", help_text="Введите цену продукта"
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal(0.01))],
+        error_messages= {
+            "min_value": "Product price must be positive",
+        },
+        verbose_name="Цена за покупку",
+        help_text="Введите цену продукта"
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
@@ -79,6 +86,13 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["product_name"]
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(price__gt=0),
+                name="price_must_be_positive",
+                violation_error_message="Product price must be positive",
+            )
+        ]
 
     def __str__(self) -> str:
         """Return string representation of Product"""
