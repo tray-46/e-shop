@@ -1,3 +1,5 @@
+from config.settings import NOTIFICATION_THRESHOLD
+from django.core.mail import send_mail
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -16,10 +18,23 @@ class BlogPostListView(ListView):
 class BlogPostDetailView(DetailView):
     model = BlogPost
 
+    @staticmethod
+    def send_notification():
+        send_mail(
+            "Gratz",
+            "Gratz, u got 5 views",
+            "no-reply@it.ivc.vsmpo.ru",
+            ["tray@it.ivc.vsmpo.ru"],
+            fail_silently=False,
+        )
+
     def get_object(self, queryset = None):
         blog_post = super().get_object(queryset)
         blog_post.views += 1
         blog_post.save()
+        if blog_post.views == NOTIFICATION_THRESHOLD:
+            self.send_notification()
+            # пока так, вообще бы асинхронность прикрутить
         return blog_post
 
 class BlogPostCreateView(CreateView):
