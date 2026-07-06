@@ -71,12 +71,14 @@ class Product(models.Model):
         help_text="Выберите катагорию продуктов",
     )
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal(0.01))],
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal(0.01))],
         error_messages={
             "min_value": "Product price must be positive",
         },
         verbose_name="Цена за покупку",
-        help_text="Введите цену продукта"
+        help_text="Введите цену продукта",
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")

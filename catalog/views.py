@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
@@ -8,8 +10,6 @@ from django.views.generic.edit import CreateView, FormView
 from catalog.forms import FeedbackForm
 from catalog.models import Product
 from catalog.utils import get_contacts
-
-from typing import Any
 
 
 # Create your views here.
@@ -24,7 +24,13 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ["product_name", "product_description", "image", "product_category", "price",]
+    fields = [
+        "product_name",
+        "product_description",
+        "image",
+        "product_category",
+        "price",
+    ]
     success_url = reverse_lazy("catalog:home")
 
 

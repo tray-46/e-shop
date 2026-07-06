@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.core.mail import send_mail
 from django.db.models import QuerySet
 from django.urls import reverse, reverse_lazy
@@ -6,7 +8,6 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from blog.models import BlogPost
 from config.settings import NOTIFICATION_THRESHOLD
-from typing import Optional
 
 
 # Create your views here.
@@ -31,7 +32,7 @@ class BlogPostDetailView(DetailView):
             fail_silently=False,
         )
 
-    def get_object(self, queryset: Optional[QuerySet[BlogPost]]=None) -> BlogPost:
+    def get_object(self, queryset: Optional[QuerySet[BlogPost]] = None) -> BlogPost:
         blog_post: BlogPost = super().get_object(queryset)
         blog_post.views += 1
         blog_post.save()
