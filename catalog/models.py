@@ -142,7 +142,7 @@ class Feedback(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
-        """Meta options for Contact model"""
+        """Meta options for Feedback model"""
 
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
