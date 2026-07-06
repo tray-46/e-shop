@@ -7,7 +7,9 @@ class BlogPost(models.Model):
     """
 
     """
-    title = models.CharField(max_length=200, unique=True, verbose_name="Заголовок", help_text="Введите заголовок поста")
+    title = models.CharField(
+        max_length=200, unique=True, verbose_name="Заголовок", help_text="Введите заголовок поста"
+    )
     content = models.TextField(verbose_name="Содержимое", help_text="Добавте содержимое поста")
     preview = models.ImageField(upload_to="blog/images/", null=True, blank=True, verbose_name="Превью",
                                 help_text="Добавьте изображение для поста")
@@ -29,5 +31,5 @@ class BlogPost(models.Model):
             )
         ]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
