@@ -8,10 +8,19 @@ from blog.models import BlogPost
 class BlogPostListView(ListView):
     model = BlogPost
 
+    def get_queryset(self):
+        queryset = BlogPost.objects.filter(is_published=True)
+        return queryset
+
 
 class BlogPostDetailView(DetailView):
     model = BlogPost
 
+    def get_object(self, queryset = None):
+        blog_post = super().get_object(queryset)
+        blog_post.views += 1
+        blog_post.save()
+        return blog_post
 
 class BlogPostCreateView(CreateView):
     model = BlogPost
@@ -22,7 +31,9 @@ class BlogPostCreateView(CreateView):
 class BlogPostUpdateView(UpdateView):
     model = BlogPost
     fields = ["title", "content", "preview", "is_published"]
-    success_url = reverse_lazy("blog:blog")
+
+    def get_success_url(self):
+        return reverse_lazy("blog:blog_post", kwargs={"pk": self.object.pk})
 
 
 class BlogPostDeleteView(DeleteView):
