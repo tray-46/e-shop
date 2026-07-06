@@ -1,15 +1,12 @@
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic.edit import CreateView, FormView
 from django.urls import reverse_lazy
 
-from catalog.forms import ProductForm, FeedbackForm
-from catalog.models import Feedback, Product
-from catalog.utils import get_contacts, get_recent_products
+from catalog.forms import FeedbackForm
+from catalog.models import Product
+from catalog.utils import get_contacts
 
 
 # Create your views here.

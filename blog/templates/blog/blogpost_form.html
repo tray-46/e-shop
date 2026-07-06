@@ -1,0 +1,58 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}
+{% if request.resolver_match.url_name == "blog_post_new" %}Blog: новый пост
+{% elif request.resolver_match.url_name == "blog_post_edit" %}Редакция: {{ blogpost.title }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>Добавление нового поста</h1>
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul class="list-group">
+            {% for field in form %}
+            <li class="list-group-item d-flex lh-sm">
+                {% if field.field.widget.input_type == "checkbox" %}
+                <div class="d-flex flex-row">
+                    <h6 class="me-3">{{ field.label_tag }}</h6>
+                    {{ field }}
+                </div>
+                {% else %}
+                <div class="d-flex flex-column gap-2 w-100">
+                    <h6 class="my-0">{{ field.label_tag }}</h6>
+                    {{ field }}
+
+                    {% if field.errors %}
+                    <span class="error-text">{{ field.errors }}</span>
+                    {% endif %}
+
+                    {% if field.help_text %}
+                    <div class="text-secondary">{{ field.help_text|safe }}</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <li class="list-group-item d-flex lh-sm">
+                <button class="btn btn-lg btn-block btn-outline-primary w-auto me-1" type="submit">
+                    {% if blogpost %}
+                    Сохранить
+                    {% else %}
+                    Добавить
+                    {% endif %}
+                </button>
+                {% if blogpost %}
+                <a class="btn btn-lg btn-block btn-outline-secondary w-auto"
+                   href="{% url 'blog:blog_post' blogpost.pk %}">Отмена</a>
+                {% else %}
+                <a class="btn btn-lg btn-block btn-outline-secondary w-auto"
+                   href="{% url 'blog:blog' %}">Отмена</a>
+                {% endif %}
+
+            </li>
+        </ul>
+    </form>
+</div>
+{% endblock %}
