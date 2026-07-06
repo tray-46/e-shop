@@ -104,7 +104,11 @@ class Contact(models.Model):
     Store a single contact information
 
     Attributes:
-
+        contact_country:
+        contact_name:
+        contact_address:
+        contact_email:
+        contact_phone:
     """
 
     contact_country = models.CharField(max_length=50, verbose_name="Страна", help_text="Введите название страны")
@@ -132,7 +136,11 @@ class Feedback(models.Model):
     Store a single contact information
 
     Attributes:
-
+        feedback_username:
+        feedback_phone:
+        feedback_message:
+        processed:
+        created_at:
     """
 
     feedback_username = models.CharField(max_length=150, verbose_name="Имя")
