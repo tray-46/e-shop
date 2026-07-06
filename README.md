@@ -36,6 +36,11 @@ Install dependencies.
 From `.env_example` create `.env` file and fill it with your environment settings.  
 Create database with name specified in settings.  
 
+Optional: add test data from fixtures.
+```
+python manage.py add_products
+```
+
 ### To run the application:  
 In console open project directory and execute following command:
 ```
