@@ -48,6 +48,10 @@
 </div>
 <div class="row">
     <a class="btn btn-lg btn-block btn-outline-primary mt-3 w-auto" role="button"
+       href="{% url 'catalog:product_edit' product.pk %}">Изменить</a>
+    <a class="btn btn-lg btn-block btn-outline-primary mt-3 ms-2 w-auto" role="button"
+       href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+    <a class="btn btn-lg btn-block btn-outline-primary mt-3 ms-2 w-auto" role="button"
        href="{{ request.META.HTTP_REFERER|default:'/' }}">Назад</a>
     <!-- не лучший способ, но пока так  -->
 </div>

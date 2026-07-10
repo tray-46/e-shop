@@ -3,11 +3,11 @@ from typing import Any
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 
-from catalog.forms import FeedbackForm
+from catalog.forms import FeedbackForm, ProductForm
 from catalog.models import Product
 from catalog.utils import get_contacts
 
@@ -24,15 +24,20 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = [
-        "product_name",
-        "product_description",
-        "image",
-        "product_category",
-        "price",
-    ]
+    form_class = ProductForm
     success_url = reverse_lazy("catalog:home")
 
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self) -> str:
+        return reverse("catalog:product_detail", kwargs={"pk": self.object.pk})
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy("catalog:home")
 
 class ContactsView(SuccessMessageMixin, FormView):
     template_name = "catalog/contacts.html"

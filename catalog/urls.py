@@ -8,9 +8,11 @@ from . import views
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path("home/", views.ProductListView.as_view(), name="home"),
     path("", RedirectView.as_view(pattern_name="catalog:home", permanent=True)),
+    path("home/", views.ProductListView.as_view(), name="home"),
+    path("product/<int:pk>/", views.ProductDetailView.as_view(), name="product_detail"),
+    path("product/new/", views.ProductCreateView.as_view(), name="product_create"),
+    path("product/<int:pk>/edit/", views.ProductUpdateView.as_view(), name="product_edit"),
+    path("product/<int:pk>/delete/", views.ProductDeleteView.as_view(), name="product_delete"),
     path("contacts/", views.ContactsView.as_view(), name="contacts"),
-    path("products/<int:pk>/", views.ProductDetailView.as_view(), name="product_details"),
-    path("add_product/", views.ProductCreateView.as_view(), name="add_product"),
 ]

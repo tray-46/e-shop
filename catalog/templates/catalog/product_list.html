@@ -27,7 +27,7 @@
                 <h1 class="card-title pricing-card-title">$ {{ product.price }}</h1>
                 <p>{{ product.product_description|truncatechars:100 }}</p>
                 <a class="btn btn-lg btn-block btn-outline-primary mt-auto" role="button"
-                   href="{% url 'catalog:product_details' product.pk %}">Детали</a>
+                   href="{% url 'catalog:product_detail' product.pk %}">Детали</a>
             </div>
         </div>
     </div>
@@ -39,9 +39,9 @@
         {% include "catalog/includes/inc_pagination.html" with page=product_list %}
     {% endif %}
     <div class="row">
-        <div class="col-2">
+        <div class="col-3">
             <a class="btn btn-lg btn-block btn-outline-primary mt-5" role="button"
-               href="{% url 'catalog:add_product' %}">Добавить продукт</a>
+               href="{% url 'catalog:product_create' %}">Добавить продукт</a>
         </div>
     </div>
 </div>
