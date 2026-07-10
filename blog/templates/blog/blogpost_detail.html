@@ -1,0 +1,49 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}{{blogpost.title}}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row g-5">
+
+        <main class="col-lg-8">
+            <article class="card border-0 shadow-sm p-4 p-md-5 mb-4 bg-white rounded">
+
+                <!-- Post Metadata -->
+                <header class="mb-1">
+                    <span class="badge bg-primary text-decoration-none link-light mb-2">Пост № {{ blogpost.id }}</span>
+                    <h1 class="fw-bolder mb-1">{{ blogpost.title }}</h1>
+                    <div class="text-muted fst-italic mb-2">Опубликовано: {{ blogpost.created_at|date:"d.m.Y" }}</div>
+                </header>
+
+                {% if blogpost.preview %}
+                    <!-- Featured Image -->
+                    <figure class="mb-2">
+                        <img class="img-fluid rounded w-100" src="{{ blogpost.preview.url }}" alt="Featured Image"/>
+                    </figure>
+                {% endif %}
+
+                <!-- Post Content Text -->
+                <section class="fs-5 lh-base">
+                    {{ blogpost.content|linebreaks }}
+                </section>
+            </article>
+        </main>
+
+        <aside class="col-lg-4">
+            <div class="card border-0 shadow-sm p-4 mb-4 bg-white rounded">
+                <h4 class="fw-bold mb-2">О блоге</h4>
+                <p class="mb-0 text-muted">Пишем о том что нам интересно</p>
+            </div>
+            <div class="card border-0 shadow-sm p-4 mb-4 bg-white rounded">
+                <a class="btn btn-lg btn-block btn-outline-primary mb-1" role="button"
+                   href="{% url 'blog:blog_post_edit' blogpost.pk %}">Редактировать</a>
+                <a class="btn btn-lg btn-block btn-outline-primary mb-1" role="button"
+                   href="{% url 'blog:blog_post_delete' blogpost.pk %}">Удалить</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" role="button"
+                   href="{% url 'blog:blog' %}">Назад</a>
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

@@ -1,80 +1,53 @@
-from django.contrib import messages
-from django.core.paginator import Paginator
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
+from typing import Any
 
-from catalog.forms import ProductForm
-from catalog.models import Feedback, Product
-from catalog.utils import get_contacts, get_recent_products
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponse
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, FormView
+
+from catalog.forms import FeedbackForm
+from catalog.models import Product
+from catalog.utils import get_contacts
 
 
 # Create your views here.
-def home(request: HttpRequest) -> HttpResponse:
-    """
-    Display the home page of the catalog app.
-
-    Template:
-        catalog/home.html
-
-    Arguments:
-        request (HttpRequest): the incoming client request object
-
-    Returns:
-        HttpResponse: the fully rendered HTML page
-    """
-    # recent_products = get_recent_products()
-    # print(recent_products)
-    # return render(request, "catalog/home.html", context={"recent_products": recent_products})
-    products_all = Product.objects.all()
-
-    paginator = Paginator(products_all, 4)
-    page_number = request.GET.get("page", 1)
-    products = paginator.get_page(page_number)
-    return render(request, "catalog/home.html", context={"products": products})
+class ProductListView(ListView):
+    model = Product
+    paginate_by = 4
 
 
-def contacts(request: HttpRequest) -> HttpResponse:
-    """
-    Display the contacts page of the catalog app and handle the submission of "Contact us" form
-
-    If the request is a GET, it renders the contacts page.
-    If the request is a POST, it displays confirmation message.
+class ProductDetailView(DetailView):
+    model = Product
 
 
-    Template:
-        catalog/contacts.html
-
-    Arguments:
-        request (HttpRequest): the incoming client request object
-
-    Returns:
-        HttpResponse: the fully rendered contacts HTML page or a page with submission confirmation
-    """
-    contacts_info = get_contacts()
-    if request.method == "POST":
-        username = request.POST.get("name", "")
-        user_phone = request.POST.get("phone", "")
-        feedback_message = request.POST.get("message", "")
-        messages.success(request, f"Спасибо {username}, Ваше сообщение получено.")
-        Feedback.objects.create(
-            feedback_username=username, feedback_phone=user_phone, feedback_message=feedback_message
-        )
-        return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
-    return render(request, "catalog/contacts.html", context={"contacts_info": contacts_info})
+class ProductCreateView(CreateView):
+    model = Product
+    fields = [
+        "product_name",
+        "product_description",
+        "image",
+        "product_category",
+        "price",
+    ]
+    success_url = reverse_lazy("catalog:home")
 
 
-def product_details(request: HttpRequest, pk: int) -> HttpResponse:
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, "catalog/product.html", context={"product": product})
+class ContactsView(SuccessMessageMixin, FormView):
+    template_name = "catalog/contacts.html"
+    form_class = FeedbackForm
+    success_url = reverse_lazy("catalog:contacts")
 
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        contacts_info = get_contacts()
+        context["contacts_info"] = contacts_info
+        return context
 
-def add_product(request: HttpRequest) -> HttpResponse:
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('catalog:home')
-    else:
-        form = ProductForm()
-
-    return render(request, "catalog/add_product.html", {"form": form})
+    def form_valid(self, form: FeedbackForm) -> HttpResponse:
+        form.save()
+        username = form.cleaned_data.get("feedback_username", "")
+        success_message = f"Спасибо {username}, Ваше сообщение получено."
+        messages.success(self.request, success_message)
+        return super().form_valid(form)

@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -70,12 +71,14 @@ class Product(models.Model):
         help_text="Выберите катагорию продуктов",
     )
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal(0.01))],
-        error_messages= {
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal(0.01))],
+        error_messages={
             "min_value": "Product price must be positive",
         },
         verbose_name="Цена за покупку",
-        help_text="Введите цену продукта"
+        help_text="Введите цену продукта",
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
@@ -104,7 +107,11 @@ class Contact(models.Model):
     Store a single contact information
 
     Attributes:
-
+        contact_country:
+        contact_name:
+        contact_address:
+        contact_email:
+        contact_phone:
     """
 
     contact_country = models.CharField(max_length=50, verbose_name="Страна", help_text="Введите название страны")
@@ -132,7 +139,11 @@ class Feedback(models.Model):
     Store a single contact information
 
     Attributes:
-
+        feedback_username:
+        feedback_phone:
+        feedback_message:
+        processed:
+        created_at:
     """
 
     feedback_username = models.CharField(max_length=150, verbose_name="Имя")
@@ -142,7 +153,7 @@ class Feedback(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
-        """Meta options for Contact model"""
+        """Meta options for Feedback model"""
 
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"

@@ -1,0 +1,21 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Удаление поста{% endblock %}
+
+{% block content %}
+<h1>Удаление поста</h1>
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul class="list-group">
+            <li class="list-group-item d-flex lh-sm">
+                <p>Вы действительно хотите удалить пост: "{{ blogpost.title }}"?</p>
+            </li>
+            <li class="list-group-item d-flex lh-sm">
+                <button class="btn btn-lg btn-block btn-outline-danger w-auto me-1" type="submit">Удалить</button>
+                <a class="btn btn-lg btn-block btn-outline-secondary w-auto" href="{% url 'blog:blog_post' blogpost.pk %}">Отмена</a>
+            </li>
+        </ul>
+    </form>
+</div>
+{% endblock %}

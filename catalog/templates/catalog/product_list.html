@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row text-center">
-    {% for product in products %}
+    {% for product in product_list %}
     <div class="col-3">
         <div class="card mb-4 box-shadow h-100">
             <div class="card-header">
@@ -35,7 +35,9 @@
     <p>no products</p>
     {% endfor %}
 
-    {% include "catalog/includes/inc_pagination.html" with page=products %}
+    {% if is_paginated %}
+        {% include "catalog/includes/inc_pagination.html" with page=product_list %}
+    {% endif %}
     <div class="row">
         <div class="col-2">
             <a class="btn btn-lg btn-block btn-outline-primary mt-5" role="button"

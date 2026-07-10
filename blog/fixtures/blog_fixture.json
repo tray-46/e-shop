@@ -1,0 +1,74 @@
+[
+{
+  "model": "blog.blogpost",
+  "pk": 1,
+  "fields": {
+    "title": "Первый пост",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "preview": "blog/images/post_back.png",
+    "created_at": "2026-07-06T06:24:19.435Z",
+    "is_published": true,
+    "views": 10
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 2,
+  "fields": {
+    "title": "Второй пост",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "preview": "blog/images/post_back_green.png",
+    "created_at": "2026-07-06T06:24:46.645Z",
+    "is_published": true,
+    "views": 1
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 3,
+  "fields": {
+    "title": "Третий пост",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "preview": "blog/images/post_back_inv.png",
+    "created_at": "2026-07-06T06:24:59.402Z",
+    "is_published": true,
+    "views": 1
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 6,
+  "fields": {
+    "title": "un_published_post",
+    "content": "this post not published",
+    "preview": "",
+    "created_at": "2026-07-06T09:18:50.856Z",
+    "is_published": false,
+    "views": 0
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 7,
+  "fields": {
+    "title": "test_post",
+    "content": "test_post",
+    "preview": "",
+    "created_at": "2026-07-06T09:20:38.919Z",
+    "is_published": true,
+    "views": 2
+  }
+},
+{
+  "model": "blog.blogpost",
+  "pk": 8,
+  "fields": {
+    "title": "1111",
+    "content": "1111",
+    "preview": "",
+    "created_at": "2026-07-06T09:29:24.134Z",
+    "is_published": false,
+    "views": 6
+  }
+}
+]
