@@ -1,3 +1,5 @@
+from typing import Any
+
 from django import forms
 
 from blog.models import BlogPost
@@ -11,7 +13,7 @@ class BlogPostForm(forms.ModelForm):
             "is_published": forms.CheckboxInput(attrs={"type": "checkbox"}),
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})

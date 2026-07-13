@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 
 from catalog.forms import FeedbackForm, ProductForm
 from catalog.models import Product
@@ -21,11 +21,25 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
 
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        print(self.request.GET)
+        context["page"] = self.request.GET.get("page", 1)
+        print(context["page"])
+        return context
+
 
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:home")
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        print(self.request.GET)
+        context["page"] = self.request.GET.get("page", 1)
+        print(context["page"])
+        return context
 
 
 class ProductUpdateView(UpdateView):
@@ -35,9 +49,11 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self) -> str:
         return reverse("catalog:product_detail", kwargs={"pk": self.object.pk})
 
+
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:home")
+
 
 class ContactsView(SuccessMessageMixin, FormView):
     template_name = "catalog/contacts.html"
