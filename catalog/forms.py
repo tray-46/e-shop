@@ -66,12 +66,10 @@ class ProductForm(forms.ModelForm):
         uploaded_image: UploadedFile = self.cleaned_data["image"]
         if uploaded_image is not None:
             with Image.open(uploaded_image) as img:
-                print("open")
                 allowed_formats = ["JPEG", "PNG"]
                 if img.format not in allowed_formats:
-                    print(f"{img.format} not allowed")
-                    raise forms.ValidationError(
-                        f"Image format not allowed: {img.format}. Upload a JPEG or PNG image.")
+
+                    raise forms.ValidationError(f"Image format not allowed: {img.format}. Upload a JPEG or PNG image.")
 
             # разделить на две функции???
 
@@ -82,8 +80,8 @@ class ProductForm(forms.ModelForm):
 
             if file_size_mb > PRODUCT_IMAGE_FILE_MAX_SIZE:
                 raise forms.ValidationError(
-                    f"Image file to large: {file_size_mb} MB! "
-                    f"Max allowed size is {PRODUCT_IMAGE_FILE_MAX_SIZE} MB")
+                    f"Image file to large: {file_size_mb} MB! " f"Max allowed size is {PRODUCT_IMAGE_FILE_MAX_SIZE} MB"
+                )
         uploaded_image.seek(0)
         return uploaded_image
 
