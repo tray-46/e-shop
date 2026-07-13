@@ -23,9 +23,16 @@ class ProductForm(forms.ModelForm):
 
     @staticmethod
     def check_for_words(text, words_list):
+        """
+        check text for words in words_list
+
+        :param text: str, text to check for words
+        :param words_list: list(str), list of words
+        :return: list(str), list of found words
+        """
         words_found = list()
         for word in words_list:
-            if word in text.lower():
+            if word.lower() in text.lower():
                 words_found.append(word)
         return words_found
 
@@ -42,6 +49,12 @@ class ProductForm(forms.ModelForm):
         if words_found:
             raise forms.ValidationError(f"Product description not allowed this words: {", ".join(words_found)}")
         return product_description
+
+    def clean_price(self):
+        price = self.cleaned_data["price"]
+        if price and price < 0:
+            raise forms.ValidationError(f"Price cannot be less than 0")
+        return price
 
 class FeedbackForm(forms.ModelForm):
     """ """
