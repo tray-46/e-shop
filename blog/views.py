@@ -6,6 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+from blog.forms import BlogPostForm
 from blog.models import BlogPost
 from config.settings import NOTIFICATION_THRESHOLD
 
@@ -44,13 +45,13 @@ class BlogPostDetailView(DetailView):
 
 class BlogPostCreateView(CreateView):
     model = BlogPost
-    fields = ["title", "content", "preview", "is_published"]
+    form_class = BlogPostForm
     success_url = reverse_lazy("blog:blog")
 
 
 class BlogPostUpdateView(UpdateView):
     model = BlogPost
-    fields = ["title", "content", "preview", "is_published"]
+    form_class = BlogPostForm
 
     def get_success_url(self) -> str:
         return reverse("blog:blog_post", kwargs={"pk": self.object.pk})

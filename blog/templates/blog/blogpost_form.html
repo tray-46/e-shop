@@ -9,18 +9,18 @@
 {% block content %}
 <h1>Добавление нового поста</h1>
 <div class="card">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <ul class="list-group">
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             {% for field in form %}
-            <li class="list-group-item d-flex lh-sm">
+            <div class="form-group mb-2">
                 {% if field.field.widget.input_type == "checkbox" %}
                 <div class="d-flex flex-row">
                     <h6 class="me-3">{{ field.label_tag }}</h6>
                     {{ field }}
                 </div>
                 {% else %}
-                <div class="d-flex flex-column gap-2 w-100">
+                <div class="form-group mb-2">
                     <h6 class="my-0">{{ field.label_tag }}</h6>
                     {{ field }}
 
@@ -33,9 +33,9 @@
                     {% endif %}
                 </div>
                 {% endif %}
-            </li>
+            </div>
             {% endfor %}
-            <li class="list-group-item d-flex lh-sm">
+            <div class="form-group mb-2">
                 <button class="btn btn-lg btn-block btn-outline-primary w-auto me-1" type="submit">
                     {% if blogpost %}
                     Сохранить
@@ -50,9 +50,8 @@
                 <a class="btn btn-lg btn-block btn-outline-secondary w-auto"
                    href="{% url 'blog:blog' %}">Отмена</a>
                 {% endif %}
-
-            </li>
-        </ul>
-    </form>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
