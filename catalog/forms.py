@@ -1,11 +1,14 @@
 from django import forms
-from config.settings import FORBIDDEN_WORDS
+from config.settings import FORBIDDEN_WORDS, PRODUCT_IMAGE_FILE_MAX_SIZE
+
+from PIL import Image
 
 from catalog.models import Feedback, Product
 
 
 class ProductForm(forms.ModelForm):
     """ """
+
     class Meta:
         model = Product
         fields = [
@@ -56,8 +59,29 @@ class ProductForm(forms.ModelForm):
             raise forms.ValidationError(f"Price cannot be less than 0")
         return price
 
+    def clean_image(self):
+        uploaded_image = self.cleaned_data["image"]
+        if uploaded_image:
+            try:
+                with Image.open(uploaded_image) as img:
+                    allowed_formats = ["JPEG", "PNG"]
+                    if img.format not in allowed_formats:
+                        raise forms.ValidationError(
+                            f"Image format not allowed: {img.format}. Upload a JPEG or PNG image.")
+            except Exception:
+                raise forms.ValidationError("Invalid or corrupted image file.")
+            file_size_mb = round(uploaded_image.size / 1024 / 1024, 2)
+            # разделить на две функции???
+            if file_size_mb > PRODUCT_IMAGE_FILE_MAX_SIZE:
+                raise forms.ValidationError(
+                    f"Image file to large: {file_size_mb} MB! "
+                    f"Max allowed size is {PRODUCT_IMAGE_FILE_MAX_SIZE} MB")
+        return uploaded_image
+
+
 class FeedbackForm(forms.ModelForm):
     """ """
+
     class Meta:
         model = Feedback
         fields = [

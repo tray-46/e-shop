@@ -29,7 +29,13 @@ Skystore: добавление продукта
                 {% endif %}
             </div>
             {% endfor%}
-            <button class="btn btn-lg btn-block btn-outline-primary w-auto" type="submit">Добавить</button>
+            <button class="btn btn-lg btn-block btn-outline-primary w-auto" type="submit">
+                {% if product %}
+                Сохранить
+                {% else %}
+                Добавить
+                {% endif %}
+            </button>
             <a class="btn btn-lg btn-block btn-outline-primary w-auto ms-2" role="button"
                href="{{ request.META.HTTP_REFERER|default:'/' }}">Отмена</a>
         </form>
