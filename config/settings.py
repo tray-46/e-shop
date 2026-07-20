@@ -147,9 +147,10 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
-# EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
 NOTIFICATION_THRESHOLD = int(os.getenv("NOTIFICATION_THRESHOLD", "0"))
 NOTIFICATION_EMAIL_ADDRESS = os.getenv("NOTIFICATION_EMAIL_ADDRESS")
 
@@ -157,3 +158,7 @@ FORBIDDEN_WORDS = [word.strip().lower() for word in os.getenv("FORBIDDEN_WORDS",
 PRODUCT_IMAGE_FILE_MAX_SIZE = int(os.getenv("PRODUCT_IMAGE_FILE_MAX_SIZE", "1"))
 
 AUTH_USER_MODEL = "users.User"
+
+LOGIN_URL = "user:login"
+LOGIN_REDIRECT_URL = "catalog:home"
+LOGOUT_REDIRECT_URL = "catalog:home"
