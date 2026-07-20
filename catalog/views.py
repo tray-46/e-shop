@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
@@ -18,7 +19,7 @@ class ProductListView(ListView):
     paginate_by = 4
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
@@ -29,7 +30,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("catalog:home")
@@ -42,7 +43,7 @@ class ProductCreateView(CreateView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
 
@@ -50,7 +51,7 @@ class ProductUpdateView(UpdateView):
         return reverse("catalog:product_detail", kwargs={"pk": self.object.pk})
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:home")
 
