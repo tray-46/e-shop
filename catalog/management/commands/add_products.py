@@ -8,8 +8,8 @@ from typing import Any
 
 from django.core.management import BaseCommand, CommandError, call_command
 
-from catalog.models import Category, Contact, Feedback, Product
 from blog.models import BlogPost
+from catalog.models import Category, Contact, Feedback, Product
 
 
 class Command(BaseCommand):
