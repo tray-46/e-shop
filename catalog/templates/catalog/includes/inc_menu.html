@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand">
     <div class="container-fluid">
-        <h5 class="navbar-brand my-0 mr-md-auto font-weight-normal">Skystore</h5>
+        <h5 class="navbar-brand my-0 mr-md-auto font-weight-normal ms-3">Skystore</h5>
         <div class="collapse navbar-collapse">
             <div class="navbar-nav me-auto">
                 <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'catalog:home' %}">Каталог</a>
@@ -9,11 +9,15 @@
             </div>
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                <span>Вы вошли как: {{ user }}</span>
-                <form method="POST" action="{% url 'users:logout' %}">
-                    {% csrf_token %}
-                    <button class="btn btn-outline-primary p-2 mx-1" type="submit">Выйти</button>
-                </form>
+                <div class="d-flex align-items-center">
+                    <span class="fs-5 me-2">
+                        Вы вошли как: <a href="{% url 'users:profile' %}" class="text-decoration-none link-dark">{{ user }}</a>
+                    </span>
+                    <form method="POST" action="{% url 'users:logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-primary p-2 mx-3" type="submit">Выйти</button>
+                    </form>
+                </div>
                 {% else %}
                 <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'users:login' %}">Войти</a>
                 <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'users:register' %}">Регистрация</a>

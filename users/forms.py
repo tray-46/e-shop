@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from users.models import User
+from django import forms
 
 
 class RegisterForm(UserCreationForm):
@@ -17,5 +18,18 @@ class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["password"].label = "Пароль"
+        for field in self.fields.values():
+            field.widget.attrs.update({"class": "form-control", })
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "avatar", "phone_number", "country",)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["first_name"].label = "Имя"
+        self.fields["last_name"].label = "Фамилия"
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control", })

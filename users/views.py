@@ -1,10 +1,14 @@
+from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.core.mail import EmailMessage
-from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 
 from config.settings import DEFAULT_FROM_EMAIL
-from users.forms import RegisterForm, LoginForm
+from users.forms import RegisterForm, LoginForm, UserProfileForm
+from users.models import User
 
 
 # Create your views here.
@@ -32,3 +36,19 @@ class RegisterView(CreateView):
 class UserLoginView(LoginView):
     template_name = "users/login.html"
     form_class = LoginForm
+
+
+class UserProfileView(UpdateView):
+    model = User
+    form_class = UserProfileForm
+    success_url = reverse_lazy("users:profile")
+
+    def get_object(self, queryset=None):
+        user = get_object_or_404(User, pk=self.request.user.pk)
+        return user
+
+    def form_valid(self, form: UserProfileForm) -> HttpResponse:
+        form.save()
+        success_message = f"Изменения сохранены."
+        messages.success(self.request, success_message)
+        return super().form_valid(form)

@@ -1,0 +1,35 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="col-2"></div>
+    <div class="col-8">
+        <h2>Профиль пользователя {{ user }}</h2>
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <!--
+                    <a class="btn btn-primary" href="#" onclick="window.history.back()">Отмена</a>
+                    -->
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+{% endblock %}
