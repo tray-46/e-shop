@@ -23,14 +23,18 @@ class User(AbstractUser):
         phone_number: (CharField) User phone number, optional
         country: (CharField) User country, optional
     """
+
     username: Optional[str] = None  # type: ignore[assignment]
     email = models.EmailField(unique=True, verbose_name="Почта", help_text="Введите Ваш email")
-    avatar = models.ImageField(upload_to="users/avatars/", null=True, blank=True, verbose_name="Аватар",
-                               help_text="Загрузите аватар")
-    phone_number = models.CharField(max_length=15, null=True, blank=True, verbose_name="Номер телефона",
-                                    help_text="Введите номер телефона")
-    country = models.CharField(max_length=50, null=True, blank=True, verbose_name="Страна",
-                               help_text="Укажите вашу страну")
+    avatar = models.ImageField(
+        upload_to="users/avatars/", null=True, blank=True, verbose_name="Аватар", help_text="Загрузите аватар"
+    )
+    phone_number = models.CharField(
+        max_length=15, null=True, blank=True, verbose_name="Номер телефона", help_text="Введите номер телефона"
+    )
+    country = models.CharField(
+        max_length=50, null=True, blank=True, verbose_name="Страна", help_text="Укажите вашу страну"
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

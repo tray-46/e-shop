@@ -6,17 +6,17 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = 'Create superuser'
+    help = "Create superuser"
 
     def handle(self, *args: Any, **options: Any) -> None:
 
-        email = input('Enter your email address: ').strip()
+        email = input("Enter your email address: ").strip()
 
         while True:
-            password = getpass.getpass('Enter your password: ')
-            password_confirmation = getpass.getpass('Enter your password again: ')
+            password = getpass.getpass("Enter your password: ")
+            password_confirmation = getpass.getpass("Enter your password again: ")
             if password != password_confirmation:
-                print('Passwords do not match')
+                print("Passwords do not match")
             else:
                 break
 
