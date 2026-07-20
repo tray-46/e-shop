@@ -1,13 +1,16 @@
-from django.http import HttpResponse
+from typing import Optional
+
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.core.mail import EmailMessage
+from django.db.models import QuerySet
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView
 
 from config.settings import DEFAULT_FROM_EMAIL
-from users.forms import RegisterForm, LoginForm, UserProfileForm
+from users.forms import LoginForm, RegisterForm, UserProfileForm
 from users.models import User
 
 
@@ -26,7 +29,7 @@ class RegisterView(CreateView):
         email = EmailMessage(mail_subject, message, DEFAULT_FROM_EMAIL, to=recipient_list)
         email.send()
 
-    def form_valid(self, form):
+    def form_valid(self, form: RegisterForm) -> HttpResponse:
         email = form.cleaned_data.get("email")
         if email is not None:
             self.send_welcome_email(email)
@@ -43,12 +46,12 @@ class UserProfileView(UpdateView):
     form_class = UserProfileForm
     success_url = reverse_lazy("users:profile")
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset: Optional[QuerySet[User]] = None) -> User:
         user = get_object_or_404(User, pk=self.request.user.pk)
         return user
 
     def form_valid(self, form: UserProfileForm) -> HttpResponse:
         form.save()
-        success_message = f"Изменения сохранены."
+        success_message = "Изменения сохранены."
         messages.success(self.request, success_message)
         return super().form_valid(form)

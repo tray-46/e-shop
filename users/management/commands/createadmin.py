@@ -1,12 +1,14 @@
 import getpass
+from typing import Any
 
-from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
+from django.core.management.base import BaseCommand
+
 
 class Command(BaseCommand):
     help = 'Create superuser'
 
-    def handle(self, *args, **options):
+    def handle(self, *args: Any, **options: Any) -> None:
 
         email = input('Enter your email address: ').strip()
 

@@ -1,5 +1,7 @@
-from django.db import models
+from typing import Optional
+
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 # Create your models here.
@@ -21,7 +23,7 @@ class User(AbstractUser):
         phone_number: (CharField) User phone number, optional
         country: (CharField) User country, optional
     """
-    username = None
+    username: Optional[str] = None  # type: ignore[assignment]
     email = models.EmailField(unique=True, verbose_name="Почта", help_text="Введите Ваш email")
     avatar = models.ImageField(upload_to="users/avatars/", null=True, blank=True, verbose_name="Аватар",
                                help_text="Загрузите аватар")
