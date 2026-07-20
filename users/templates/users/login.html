@@ -1,0 +1,20 @@
+{% extends "dogs/base.html" %}
+
+{% block title %}Аутентификация{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-6">
+        <h2>Вход на сайт</h2>
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
