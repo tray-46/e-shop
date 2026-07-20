@@ -1,8 +1,22 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Skystore</h5>
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:home' %}">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog' %}">Блог</a>
-        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:contacts' %}">Контакты</a>
-    </nav>
-</div>
+<nav class="navbar navbar-expand">
+    <div class="container-fluid">
+        <h5 class="navbar-brand my-0 mr-md-auto font-weight-normal">Skystore</h5>
+        <div class="collapse navbar-collapse">
+            <div class="navbar-nav me-auto">
+                <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'catalog:home' %}">Каталог</a>
+                <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'blog:blog' %}">Блог</a>
+                <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'catalog:contacts' %}">Контакты</a>
+            </div>
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <span>Вы вошли как: {{ user }}</span>
+                    <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'blog:blog' %}">Выйти</a>
+                {% else %}
+                    <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'catalog:contacts' %}">Войти</a>
+                    <a class="btn btn-outline-primary p-2 mx-1" href="{% url 'users:register' %}">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
