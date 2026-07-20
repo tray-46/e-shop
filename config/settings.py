@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog",
     "blog",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,5 @@ NOTIFICATION_EMAIL_ADDRESS = os.getenv("NOTIFICATION_EMAIL_ADDRESS")
 
 FORBIDDEN_WORDS = [word.strip().lower() for word in os.getenv("FORBIDDEN_WORDS", "").split(",")]
 PRODUCT_IMAGE_FILE_MAX_SIZE = int(os.getenv("PRODUCT_IMAGE_FILE_MAX_SIZE", "1"))
+
+AUTH_USER_MODEL = "users.User"
