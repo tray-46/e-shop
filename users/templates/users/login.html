@@ -1,4 +1,4 @@
-{% extends "dogs/base.html" %}
+{% extends "catalog/base.html" %}
 
 {% block title %}Аутентификация{% endblock %}
 
@@ -12,6 +12,7 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-primary">Войти</button>
+                    <a class="btn btn-primary" href="#" onclick="window.history.back()">Отмена</a>
                 </form>
             </div>
         </div>
