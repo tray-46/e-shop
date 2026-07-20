@@ -10,6 +10,6 @@ app_name = UsersConfig.name
 
 urlpatterns = [
     path("register/", views.RegisterView.as_view(), name="register"),
-    path("login/", LoginView.as_view(template_name="users/login.html"), name="login"),
+    path("login/", views.UserLoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
 ]
