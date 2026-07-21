@@ -162,6 +162,6 @@ PRODUCT_IMAGE_FILE_MAX_SIZE = int(os.getenv("PRODUCT_IMAGE_FILE_MAX_SIZE", "1"))
 
 AUTH_USER_MODEL = "users.User"
 
-LOGIN_URL = "user:login"
+LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "catalog:home"
 LOGOUT_REDIRECT_URL = "catalog:home"
