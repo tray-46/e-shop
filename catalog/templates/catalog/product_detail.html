@@ -57,14 +57,14 @@
                     </button>
                 </form>
                 {% endif %}
-                {% if perms.catalog.delete_product %}
+                {% if perms.catalog.delete_product or product.owner == user %}
                 <a class="btn btn-lg btn-block btn-outline-primary mb-3 w-100" role="button"
                    href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
                 {% endif %}
-
+                {% if product.owner == user %}
                 <a class="btn btn-lg btn-block btn-outline-primary mb-3 w-100" role="button"
                    href="{% url 'catalog:product_edit' product.pk %}">Изменить</a>
-
+                {% endif %}
                 <a class="btn btn-lg btn-block btn-outline-primary w-100" role="button"
                    href="{% url 'catalog:home' %}?page={{ page }}">Назад</a>
             </div>
