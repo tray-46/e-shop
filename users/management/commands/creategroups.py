@@ -1,4 +1,3 @@
-import getpass
 from typing import Any
 
 from django.contrib.auth.models import Group, Permission
@@ -19,8 +18,9 @@ class Command(BaseCommand):
         blogpost_add_permission = Permission.objects.get(codename="add_blogpost")
         blogpost_change_permission = Permission.objects.get(codename="change_blogpost")
         blogpost_delete_permission = Permission.objects.get(codename="delete_blogpost")
-        content_managers.permissions.add(blogpost_add_permission, blogpost_change_permission,
-                                         blogpost_delete_permission)
+        content_managers.permissions.add(
+            blogpost_add_permission, blogpost_change_permission, blogpost_delete_permission
+        )
         content_managers.save()
 
         self.stdout.write(self.style.SUCCESS("Groups successfully added"))

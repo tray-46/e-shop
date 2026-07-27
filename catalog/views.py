@@ -1,10 +1,10 @@
 from typing import Any
 
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
-from django.http import HttpResponse, HttpResponseForbidden, HttpRequest, Http404
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, View
@@ -75,6 +75,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         obj = self.get_object()
         return obj.owner == self.request.user or self.request.user.has_perm("catalog.delete_product")
+
 
 class ProductUnpublishView(LoginRequiredMixin, UserPassesTestMixin, View):
     """"""

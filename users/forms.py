@@ -1,7 +1,9 @@
 from typing import Any
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm as DefaultUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserChangeForm as DefaultUserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 
 from users.models import User
 
@@ -25,6 +27,7 @@ class RegisterForm(UserCreationForm):
 
 class UserChangeForm(DefaultUserCreationForm):
     """ """
+
     class Meta(DefaultUserCreationForm.Meta):
         model = User
         fields = ("email",)

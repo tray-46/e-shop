@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from users.forms import UserChangeForm, RegisterForm
+from users.forms import RegisterForm, UserChangeForm
 from users.models import User
 
 
@@ -9,6 +9,7 @@ from users.models import User
 @admin.register(User)
 class UserAdmin(UserAdmin):
     """User admin model"""
+
     model = User
     add_form = RegisterForm
     form = UserChangeForm
@@ -27,8 +28,11 @@ class UserAdmin(UserAdmin):
     )
 
     add_fieldsets = (
-        (None, {
-            "classes": ("wide",),
-            "fields": ("email", "password1", "password2"),
-        }),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("email", "password1", "password2"),
+            },
+        ),
     )
