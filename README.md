@@ -35,10 +35,16 @@ git@github.com:tray-46/e-shop.git
 Install dependencies.
 From `.env_example` create `.env` file and fill it with your environment settings.  
 Create database with name specified in settings.  
+The project uses a modified AbstractUser model. If you've already applied migrations to the database, you may need to roll back the migrations for the "auth" application.
 
-Optional: add test data from fixtures.
+Optional:
+add test data from fixtures.
 ```
 python manage.py add_products
+```
+create superuser
+```
+python manage.py createadmin
 ```
 
 ### To run the application:  
