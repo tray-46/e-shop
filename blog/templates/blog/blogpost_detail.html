@@ -36,10 +36,14 @@
                 <p class="mb-0 text-muted">Пишем о том что нам интересно</p>
             </div>
             <div class="card border-0 shadow-sm p-4 mb-4 bg-white rounded">
+                {% if perms.blog.delete_blogpost %}
                 <a class="btn btn-lg btn-block btn-outline-primary mb-1" role="button"
                    href="{% url 'blog:blog_post_edit' blogpost.pk %}">Редактировать</a>
+                {% endif %}
+                {% if perms.blog.delete_blogpost %}
                 <a class="btn btn-lg btn-block btn-outline-primary mb-1" role="button"
                    href="{% url 'blog:blog_post_delete' blogpost.pk %}">Удалить</a>
+                {% endif %}
                 <a class="btn btn-lg btn-block btn-outline-primary" role="button"
                    href="{% url 'blog:blog' %}">Назад</a>
             </div>
