@@ -56,19 +56,25 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
     form_class = ProductForm
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.owner == self.request.user
 
     def get_success_url(self) -> str:
         return reverse("catalog:product_detail", kwargs={"pk": self.object.pk})
 
 
-class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
-    permission_required = "catalog.delete_product"
     success_url = reverse_lazy("catalog:home")
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.owner == self.request.user or self.request.user.has_perm("catalog.delete_product")
 
 class ProductUnpublishView(LoginRequiredMixin, UserPassesTestMixin, View):
     """"""
