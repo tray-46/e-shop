@@ -51,6 +51,10 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         print(context["page"])
         return context
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
