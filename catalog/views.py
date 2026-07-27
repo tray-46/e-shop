@@ -1,11 +1,13 @@
 from typing import Any
 
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponse
+from django.db.models import QuerySet
+from django.http import HttpResponse, HttpResponseForbidden, HttpRequest, Http404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 
 from catalog.forms import FeedbackForm, ProductForm
@@ -18,16 +20,23 @@ class ProductListView(ListView):
     model = Product
     paginate_by = 4
 
+    def get_queryset(self) -> QuerySet[Product]:
+        return Product.objects.filter(is_published=True)
+
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        print(self.request.GET)
         context["page"] = self.request.GET.get("page", 1)
-        print(context["page"])
         return context
+
+    def get_object(self, queryset: QuerySet[Product] = None) -> Product:
+        obj = super().get_object(queryset)
+        if not obj.is_published:
+            raise Http404("No such product available")
+        return obj
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -51,9 +60,26 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return reverse("catalog:product_detail", kwargs={"pk": self.object.pk})
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
+    permission_required = "catalog.delete_product"
     success_url = reverse_lazy("catalog:home")
+
+
+class ProductUnpublishView(LoginRequiredMixin, UserPassesTestMixin, View):
+    """"""
+
+    def test_func(self) -> bool:
+        return self.request.user.has_perm("catalog.can_unpublish_product")
+
+    def post(self, request, pk):
+        if not self.request.user.has_perm("catalog.can_unpublish_product"):
+            return HttpResponseForbidden()
+
+        product = get_object_or_404(Product, pk=pk)
+        product.is_published = False
+        product.save()
+        return redirect("catalog:home")
 
 
 class ContactsView(SuccessMessageMixin, FormView):
