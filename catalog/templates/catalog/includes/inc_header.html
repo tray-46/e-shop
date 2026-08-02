@@ -4,7 +4,8 @@
         продать</p>
     <div class="btn-group" role="group">
         {% for category in category_list %}
-        <a href="{% url 'catalog:category_products' category.pk %}" class="btn btn-small btn-outline-secondary">
+        <a href="{% url 'catalog:category_products' category.pk %}"
+           class="btn btn-small btn-outline-secondary {% if category.pk == category_id %}active{% endif %}">
             {{ category }}</a>
         {% endfor %}
     </div>
