@@ -11,10 +11,8 @@ from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 
 from catalog.forms import FeedbackForm, ProductForm
-from catalog.models import Product
-from catalog.services import get_contacts, get_category_list
-
-from catalog.services import get_published_product_list
+from catalog.models import Product, Category
+from catalog.services import get_contacts, get_category_list, get_published_product_list, get_category_products
 
 
 # Create your views here.
@@ -120,4 +118,17 @@ class ContactsView(SuccessMessageMixin, FormView):
 
 
 class CategoryProductsListView(ListView):
-    pass
+    model = Product
+    template_name = "catalog/product_list.html"
+    context_object_name = "product_list"
+    paginate_by = 4
+
+    def get_queryset(self) -> QuerySet[Product]:
+        return get_category_products(self.kwargs["pk"])
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["category_list"] = get_category_list()
+        context["category_id"] = Category.objects.get(pk=self.kwargs["pk"]).id
+        print(context["category_id"])
+        return context
