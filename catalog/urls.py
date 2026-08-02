@@ -1,6 +1,6 @@
 from django.urls import path
-from django.views.generic import RedirectView
 from django.views.decorators.cache import cache_page
+from django.views.generic import RedirectView
 
 from catalog.apps import CatalogConfig
 

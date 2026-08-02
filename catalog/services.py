@@ -1,6 +1,7 @@
-from django.db.models import QuerySet
 from django.core.cache import cache
-from catalog.models import Contact, Product, Category
+from django.db.models import QuerySet
+
+from catalog.models import Category, Contact, Product
 from config.settings import CACHE_ENABLED
 
 
@@ -14,6 +15,7 @@ def get_published_product_list() -> QuerySet:
     if CACHE_ENABLED:
         key = "published_products"
         products = cache.get(key)
+        print(type(products))
         if products is None:
             products = queryset
             cache.set(key, products, 60 * 5)
@@ -23,11 +25,11 @@ def get_published_product_list() -> QuerySet:
 
 def get_category_products(category_id: int) -> QuerySet:
     """
-        load products from targeted category
+    load products from targeted category
 
-        :param category_id: id of category
-        :return: QuerySet with all published products in category
-        """
+    :param category_id: id of category
+    :return: QuerySet with all published products in category
+    """
     queryset = Product.objects.filter(is_published=True, product_category_id=category_id)
     if CACHE_ENABLED:
         key = f"category_{category_id}_products"

@@ -4,15 +4,15 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
-from django.http import Http404, HttpResponse, HttpResponseForbidden
+from django.http import Http404, HttpResponse, HttpResponseForbidden, HttpRequest
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 
 from catalog.forms import FeedbackForm, ProductForm
-from catalog.models import Product, Category
-from catalog.services import get_contacts, get_category_list, get_published_product_list, get_category_products
+from catalog.models import Category, Product
+from catalog.services import get_category_list, get_category_products, get_contacts, get_published_product_list
 
 
 # Create your views here.
@@ -38,7 +38,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
         return context
 
     def get_object(self, queryset: QuerySet[Product] = None) -> Product:
-        obj = super().get_object(queryset)
+        obj: Product = super().get_object(queryset)
         if not obj.is_published:
             raise Http404("No such product available")
         return obj
@@ -51,12 +51,10 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        print(self.request.GET)
         context["page"] = self.request.GET.get("page", 1)
-        print(context["page"])
         return context
 
-    def form_valid(self, form):
+    def form_valid(self, form: ProductForm) -> HttpResponse:
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
@@ -65,7 +63,7 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
     form_class = ProductForm
 
-    def test_func(self):
+    def test_func(self) -> bool:
         obj = self.get_object()
         return obj.owner == self.request.user or self.request.user.has_perm("catalog.change_product")
 
@@ -77,7 +75,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
     success_url = reverse_lazy("catalog:home")
 
-    def test_func(self):
+    def test_func(self) -> bool:
         obj = self.get_object()
         return obj.owner == self.request.user or self.request.user.has_perm("catalog.delete_product")
 
@@ -88,7 +86,7 @@ class ProductUnpublishView(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self) -> bool:
         return self.request.user.has_perm("catalog.can_unpublish_product")
 
-    def post(self, request, pk):
+    def post(self, request: HttpRequest, pk: int) -> HttpResponse:
         if not self.request.user.has_perm("catalog.can_unpublish_product"):
             return HttpResponseForbidden()
 
@@ -130,5 +128,4 @@ class CategoryProductsListView(ListView):
         context = super().get_context_data(**kwargs)
         context["category_list"] = get_category_list()
         context["category_id"] = Category.objects.get(pk=self.kwargs["pk"]).id
-        print(context["category_id"])
         return context
