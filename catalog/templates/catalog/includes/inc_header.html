@@ -2,4 +2,10 @@
     <h1 class="display-4">Skystore</h1>
     <p class="lead">Skystore - это отличный вариант хранения ваших плагинов и примеров кода, который вы бы хотели
         продать</p>
+    <div class="btn-group" role="group">
+        {% for category in category_list %}
+        <a href="{% url 'catalog:category_products' category.pk %}" class="btn btn-small btn-outline-secondary">
+            {{ category }}</a>
+        {% endfor %}
+    </div>
 </div>
