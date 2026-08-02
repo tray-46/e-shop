@@ -8,14 +8,15 @@
     <div class="col-4">
         <div class="ratio ratio-1x1">
             {% if product.image %}
-                <img class="img-thumbnail" style="object-fit: cover;" src="{{ product.image.url }}" alt="{{ product.product_name }}">
+            <img class="img-thumbnail" style="object-fit: cover;" src="{{ product.image.url }}"
+                 alt="{{ product.product_name }}">
             {% else %}
-                <img class="img-thumbnail" style="object-fit: cover;" src="{% static 'images/no_image.png' %}" alt="{{ product.product_name }}">
+            <img class="img-thumbnail" style="object-fit: cover;" src="{% static 'images/no_image.png' %}"
+                 alt="{{ product.product_name }}">
             {% endif %}
         </div>
     </div>
-    <div class="col-1"></div>
-    <div class="col-7">
+    <div class="col-5">
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
@@ -45,13 +46,29 @@
             </li>
         </ul>
     </div>
-</div>
-<div class="row">
-    <a class="btn btn-lg btn-block btn-outline-primary mt-3 w-auto" role="button"
-       href="{% url 'catalog:product_edit' product.pk %}">Изменить</a>
-    <a class="btn btn-lg btn-block btn-outline-primary mt-3 ms-2 w-auto" role="button"
-       href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
-    <a class="btn btn-lg btn-block btn-outline-primary mt-3 ms-2 w-auto" role="button"
-               href="{% url 'catalog:home' %}?page={{ page }}">Назад</a>
+    <aside class="col-3">
+        <div class="row">
+            <div class="card border-0 shadow-sm px-4 mb-4 bg-white rounded">
+                {% if perms.catalog.can_unpublish_product %}
+                <form method="POST" action="{% url 'catalog:product_unpublish' product.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-lg btn-block btn-outline-primary mb-3 w-100">
+                        Отменить публикацию
+                    </button>
+                </form>
+                {% endif %}
+                {% if perms.catalog.delete_product or product.owner == user %}
+                <a class="btn btn-lg btn-block btn-outline-primary mb-3 w-100" role="button"
+                   href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+                {% endif %}
+                {% if product.owner == user %}
+                <a class="btn btn-lg btn-block btn-outline-primary mb-3 w-100" role="button"
+                   href="{% url 'catalog:product_edit' product.pk %}">Изменить</a>
+                {% endif %}
+                <a class="btn btn-lg btn-block btn-outline-primary w-100" role="button"
+                   href="{% url 'catalog:home' %}?page={{ page }}">Назад</a>
+            </div>
+        </div>
+    </aside>
 </div>
 {% endblock %}

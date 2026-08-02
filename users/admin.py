@@ -1,15 +1,38 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
+from users.forms import RegisterForm, UserChangeForm
 from users.models import User
 
 
 # Register your models here.
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(UserAdmin):
     """User admin model"""
 
-    list_display = (
-        "id",
-        "email",
-    )
+    model = User
+    add_form = RegisterForm
+    form = UserChangeForm
+
+    ordering = ("id",)
+
+    list_display = ("id", "email", "is_staff", "is_active")
+    list_filter = ("is_staff", "is_active")
     search_fields = ("email",)
+
+    fieldsets = (
+        (None, {"fields": ("email", "password")}),
+        ("Personal info", {"fields": ("first_name", "last_name", "phone_number", "country", "avatar")}),
+        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
+        ("Important dates", {"fields": ("last_login", "date_joined")}),
+    )
+
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": ("email", "password1", "password2"),
+            },
+        ),
+    )
