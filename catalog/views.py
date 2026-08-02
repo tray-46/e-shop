@@ -14,6 +14,8 @@ from catalog.forms import FeedbackForm, ProductForm
 from catalog.models import Product
 from catalog.services import get_contacts
 
+from catalog.services import get_published_product_list
+
 
 # Create your views here.
 class ProductListView(ListView):
@@ -21,7 +23,7 @@ class ProductListView(ListView):
     paginate_by = 4
 
     def get_queryset(self) -> QuerySet[Product]:
-        return Product.objects.filter(is_published=True)
+        return get_published_product_list()
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
