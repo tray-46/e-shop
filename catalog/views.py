@@ -12,7 +12,7 @@ from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateVi
 
 from catalog.forms import FeedbackForm, ProductForm
 from catalog.models import Product
-from catalog.services import get_contacts
+from catalog.services import get_contacts, get_category_list
 
 from catalog.services import get_published_product_list
 
@@ -24,6 +24,11 @@ class ProductListView(ListView):
 
     def get_queryset(self) -> QuerySet[Product]:
         return get_published_product_list()
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["category_list"] = get_category_list()
+        return context
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -112,3 +117,7 @@ class ContactsView(SuccessMessageMixin, FormView):
         success_message = f"Спасибо {username}, Ваше сообщение получено."
         messages.success(self.request, success_message)
         return super().form_valid(form)
+
+
+class CategoryProductsListView(ListView):
+    pass
