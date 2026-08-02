@@ -12,7 +12,7 @@ from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateVi
 
 from catalog.forms import FeedbackForm, ProductForm
 from catalog.models import Product
-from catalog.utils import get_contacts
+from catalog.services import get_contacts
 
 
 # Create your views here.
