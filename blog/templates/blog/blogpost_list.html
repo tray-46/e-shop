@@ -22,10 +22,8 @@
 <div class="container px-4 py-5" id="custom-cards">
     <div class="d-flex justify-content-between pb-2 border-bottom">
         <h2>Записи блога:</h2>
-        {% if perms.blog.add_blogpost %}
         <a class="btn btn-lg btn-block btn-outline-primary" role="button"
            href="{% url 'blog:blog_post_new' %}">Добавить пост</a>
-        {% endif %}
     </div>
 
     <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">

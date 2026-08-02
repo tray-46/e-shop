@@ -64,7 +64,7 @@ class ProductForm(forms.ModelForm):
 
     def clean_image(self) -> UploadedFile:
         uploaded_image: UploadedFile = self.cleaned_data["image"]
-        if uploaded_image:
+        if uploaded_image is not None:
             with Image.open(uploaded_image) as img:
                 allowed_formats = ["JPEG", "PNG"]
                 if img.format not in allowed_formats:
@@ -82,7 +82,7 @@ class ProductForm(forms.ModelForm):
                 raise forms.ValidationError(
                     f"Image file to large: {file_size_mb} MB! " f"Max allowed size is {PRODUCT_IMAGE_FILE_MAX_SIZE} MB"
                 )
-            uploaded_image.seek(0)
+        uploaded_image.seek(0)
         return uploaded_image
 
 

@@ -1,6 +1,5 @@
 from typing import Optional
 
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.mail import send_mail
 from django.db.models import QuerySet
 from django.urls import reverse, reverse_lazy
@@ -44,23 +43,20 @@ class BlogPostDetailView(DetailView):
         return blog_post
 
 
-class BlogPostCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+class BlogPostCreateView(CreateView):
     model = BlogPost
     form_class = BlogPostForm
-    permission_required = "blog.add_blogpost"
     success_url = reverse_lazy("blog:blog")
 
 
-class BlogPostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class BlogPostUpdateView(UpdateView):
     model = BlogPost
-    permission_required = "blog.change_blogpost"
     form_class = BlogPostForm
 
     def get_success_url(self) -> str:
         return reverse("blog:blog_post", kwargs={"pk": self.object.pk})
 
 
-class BlogPostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class BlogPostDeleteView(DeleteView):
     model = BlogPost
-    permission_required = "blog.add_blogpost"
     success_url = reverse_lazy("blog:blog")

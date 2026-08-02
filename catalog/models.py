@@ -3,8 +3,6 @@ from decimal import Decimal
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from users.models import User
-
 
 # Create your models here.
 class Category(models.Model):
@@ -82,10 +80,8 @@ class Product(models.Model):
         verbose_name="Цена за покупку",
         help_text="Введите цену продукта",
     )
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="products", verbose_name="Владелец")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
-    is_published = models.BooleanField(default=False, verbose_name="Статус публикации")
 
     class Meta:
         """Meta options for Product model"""
@@ -99,9 +95,6 @@ class Product(models.Model):
                 name="price_must_be_positive",
                 violation_error_message="Product price must be positive",
             )
-        ]
-        permissions = [
-            ("can_unpublish_product", "Can unpublish product"),
         ]
 
     def __str__(self) -> str:
