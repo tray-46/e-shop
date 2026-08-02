@@ -1,19 +1,43 @@
 from django.db.models import QuerySet
 from django.core.cache import cache
-from catalog.models import Contact, Product
+from catalog.models import Contact, Product, Category
 from config.settings import CACHE_ENABLED
 
 
 def get_published_product_list() -> QuerySet:
+    """
+    load published products
+
+    :return: QuerySet with all published products
+    """
     queryset = Product.objects.filter(is_published=True)
     if CACHE_ENABLED:
-        key = "products"
-        products = cache.get('key')
+        key = "published_products"
+        products = cache.get(key)
         if products is None:
             products = queryset
-            cache.set('key', products, 60 * 5)
+            cache.set(key, products, 60 * 5)
         return products
     return queryset
+
+
+def get_category_products(category_id: int) -> QuerySet:
+    """
+        load products from targeted category
+
+        :param category_id: id of category
+        :return: QuerySet with all published products in category
+        """
+    queryset = Product.objects.filter(is_published=True, product_category_id=category_id)
+    if CACHE_ENABLED:
+        key = f"category_{category_id}_products"
+        products = cache.get(key)
+        if products is None:
+            products = queryset
+            cache.set(key, products, 60 * 5)
+        return products
+    return queryset
+
 
 def get_recent_products(number_of_products: int = 4) -> QuerySet:
     """
@@ -31,3 +55,7 @@ def get_contacts() -> QuerySet:
     :return (QuerySet): all contacts:
     """
     return Contact.objects.all().order_by("id")
+
+
+def get_category_list() -> QuerySet:
+    return Category.objects.all().order_by("category_name")
