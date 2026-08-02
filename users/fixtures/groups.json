@@ -1,18 +1,19 @@
 [
 {
     "model": "auth.group",
-    "pk": 1,
+    "pk": 3,
     "fields": {
         "name": "Product_moderators",
         "permissions": [
             45,
+            26,
             27
         ]
     }
 },
 {
     "model": "auth.group",
-    "pk": 2,
+    "pk": 4,
     "fields": {
         "name": "Content_managers",
         "permissions": [

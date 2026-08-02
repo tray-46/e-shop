@@ -62,7 +62,7 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         obj = self.get_object()
-        return obj.owner == self.request.user
+        return obj.owner == self.request.user or self.request.user.has_perm("catalog.change_product")
 
     def get_success_url(self) -> str:
         return reverse("catalog:product_detail", kwargs={"pk": self.object.pk})

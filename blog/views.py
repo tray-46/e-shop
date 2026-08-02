@@ -41,6 +41,7 @@ class BlogPostDetailView(DetailView):
         if blog_post.views == NOTIFICATION_THRESHOLD:
             self.send_notification()
             # пока так, вообще бы асинхронность прикрутить
+            # или celery
         return blog_post
 
 
@@ -62,5 +63,5 @@ class BlogPostUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
 
 class BlogPostDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = BlogPost
-    permission_required = "blog.add_blogpost"
+    permission_required = "blog.delete_blogpost"
     success_url = reverse_lazy("blog:blog")
