@@ -35,7 +35,13 @@ git@github.com:tray-46/e-shop.git
 Install dependencies.
 From `.env_example` create `.env` file and fill it with your environment settings.  
 Create database with name specified in settings.  
-The project uses a modified AbstractUser model. If you've already applied migrations to the database, you may need to roll back the migrations for the "auth" application.
+The project uses a modified AbstractUser model. If you've already applied migrations to the database, 
+you may need to roll back the migrations for the "auth" application.
+
+Redis is used for cache, you can download Windows version here:
+```
+https://github.com/redis-windows/redis-windows/releases
+```
 
 Optional:
 add test data from fixtures.
