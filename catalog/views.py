@@ -1,10 +1,10 @@
-from typing import Any
+from typing import Any, Optional
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
-from django.http import Http404, HttpResponse, HttpResponseForbidden, HttpRequest
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, View
@@ -37,7 +37,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
         context["page"] = self.request.GET.get("page", 1)
         return context
 
-    def get_object(self, queryset: QuerySet[Product] = None) -> Product:
+    def get_object(self, queryset: Optional[QuerySet[Product]] = None) -> Product:
         obj: Product = super().get_object(queryset)
         if not obj.is_published:
             raise Http404("No such product available")

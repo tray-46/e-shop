@@ -14,8 +14,7 @@ def get_published_product_list() -> QuerySet:
     queryset = Product.objects.filter(is_published=True)
     if CACHE_ENABLED:
         key = "published_products"
-        products = cache.get(key)
-        print(type(products))
+        products: QuerySet | None = cache.get(key)
         if products is None:
             products = queryset
             cache.set(key, products, 60 * 5)
@@ -33,7 +32,7 @@ def get_category_products(category_id: int) -> QuerySet:
     queryset = Product.objects.filter(is_published=True, product_category_id=category_id)
     if CACHE_ENABLED:
         key = f"category_{category_id}_products"
-        products = cache.get(key)
+        products: QuerySet | None = cache.get(key)
         if products is None:
             products = queryset
             cache.set(key, products, 60 * 5)
