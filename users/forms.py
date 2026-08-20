@@ -30,7 +30,6 @@ class UserChangeForm(DefaultUserCreationForm):
 
     class Meta(DefaultUserCreationForm.Meta):
         model = User
-        fields = ("email",)
 
 
 class LoginForm(AuthenticationForm):
