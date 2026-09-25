@@ -20,7 +20,10 @@ RUN apt-get update \
         libpq-dev \
     && curl -sSL http://install.python-poetry.org | python3 - \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-ansi --no-root --only main
 
 COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-ansi --no-root --only main
