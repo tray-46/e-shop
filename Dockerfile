@@ -7,6 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 ENV POETRY_VERSION=2.2.1 \
     POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_NO_INTERACTION=true \
     POETRY_HOME="/opt/poetry/"
 
 ENV PATH="$POETRY_HOME/bin:$PATH"
@@ -20,6 +21,9 @@ RUN apt-get update \
     && curl -sSL http://install.python-poetry.org | python3 - \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-ansi --no-root --only main
 
 COPY . /app
 
