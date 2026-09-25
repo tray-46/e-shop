@@ -178,4 +178,4 @@ LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "catalog:home"
 LOGOUT_REDIRECT_URL = "catalog:home"
 
-# CSRF_TRUSTED_ORIGINS = ["localhost", "127.0.0.1", "51.250.105.45"]
+CSRF_TRUSTED_ORIGINS = ["http://51.250.105.45"]
