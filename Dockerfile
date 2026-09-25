@@ -11,7 +11,7 @@ ENV POETRY_VERSION=2.2.1 \
 
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
-RUN apt-get uodate \
+RUN apt-get update \
     && apt-get install --no-install-recomends -y \
         curl \
         build-essential \
