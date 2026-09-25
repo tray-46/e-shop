@@ -12,7 +12,7 @@ ENV POETRY_VERSION=2.2.1 \
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
 RUN apt-get update \
-    && apt-get install --no-install-recomends -y \
+    && apt-get install --no-install-recommends -y \
         curl \
         build-essential \
         gcc \
