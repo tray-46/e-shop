@@ -141,11 +141,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "/static/"
-# if DEBUG:
-#     STATICFILES_DIRS = [
-#         BASE_DIR / "static",
-#     ]
-# else:
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -183,5 +178,4 @@ LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "catalog:home"
 LOGOUT_REDIRECT_URL = "catalog:home"
 
-CSRF_COOKIE_SECURE = None
-CSRF_COOKIE_DOMAIN = None
+CSRF_TRUSTED_ORIGINS = ["localhost", "127.0.0.1", "51.250.105.45"]
