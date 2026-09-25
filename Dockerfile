@@ -29,5 +29,5 @@ COPY . /app
 
 EXPOSE 8000
 
-RUN useradd -U appuser && chown -R appuser:appuser /app
-USER appuser
+#RUN useradd -U appuser && chown -R appuser:appuser /app
+#USER appuser
