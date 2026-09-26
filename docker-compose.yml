@@ -44,6 +44,16 @@ services:
     env_file:
       - ./.env
 
+  adminer:
+    image: adminer:6.1.0
+    container_name: e-shop-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - dbnet
+    depends_on:
+      - db
+
 volumes:
   postgres_data:
   static_volume:
