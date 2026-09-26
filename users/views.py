@@ -31,8 +31,8 @@ class RegisterView(CreateView):
 
     def form_valid(self, form: RegisterForm) -> HttpResponse:
         email = form.cleaned_data.get("email")
-        if email is not None:
-            self.send_welcome_email(email)
+        # if email is not None:
+        #     self.send_welcome_email(email)
         return super().form_valid(form)
 
 
