@@ -49,8 +49,6 @@ services:
     container_name: e-shop-adminer
     ports:
       - "8080:8080"
-    networks:
-      - dbnet
     depends_on:
       - db
 
